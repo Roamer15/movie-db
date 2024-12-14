@@ -150,7 +150,7 @@ button:focus-visible {
 /* Hero Banner */
 .hero-banner {
   position: relative;
-  height: 70vh;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -862,4 +862,139 @@ button:focus-visible {
 
 #search-results::-webkit-scrollbar-thumb:hover {
   background-color: #0056b3; /* Darker blue on hover */
+}
+
+.bars {
+  display: none;
+}
+
+
+
+/* Media Queries */
+
+@media (max-width: 900px) {
+  #header {
+    padding: 5px;
+    font-size: 1rem;
+  }
+
+  #symbol {
+    display: block;
+  }
+
+  #search-bar.active {
+    display: inline-block;
+    opacity: 1;
+    width: 120px;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 12px;
+}
+
+  .header-btn {
+    display: none;
+  }
+
+  #search-btn {
+    display: flex;
+  }
+
+  .slide-caption {
+    font-size: 0.8rem;
+    padding: 4px 6px;
+  }
+
+  #menu {
+    display: none;
+  }
+
+  #logo {
+    display: none;
+    gap: 0.4rem;
+  }
+
+  .bars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  #movie-partners {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 0; 
+  }
+  
+  #movie-partners img {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    margin-right: 20px; 
+  }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap to the next line */
+    justify-content: center; /* Center the boxes horizontally */ 
+  }
+  
+  .genreBox {
+    background-color: #333; /* Example background color */
+    color: #fff;
+    padding: 10px 15px; 
+    margin: 5px; 
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px; 
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #playBtnDown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  #playOneDown,
+  #playTwoDown {
+    padding: 0.5rem;
+  }
+
+  .carousel-button,
+  .scroll-btn {
+    display: none;
+  }
+
+  .carousel-container {
+    gap: 0.4rem;
+  }
+
+  #watchlist .carousel-container {
+    gap: 0.4rem;
+  }
+
+  .hero-banner {
+    h1 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .hero-details {
+    margin-left: 1rem;
+  }
+
+  #playOne,
+  #playTwo,
+  #playThree {
+    padding: 0.5rem;
+    margin-bottom: 10px;
+  }
 }

@@ -1,11 +1,16 @@
 import "./style.css";
 
+
 document.querySelector("#app").innerHTML = `
       <div id="header">
           <div id="logo">
             <img src="./public/images/Logo.png" alt="logo" id="symbol">
             <img src="./public/images/SaintStream.png" alt="logo">
           </div>
+           <div class="bars">
+            <img src="./public/images/Logo.png" alt="logo" id="symbol">
+            <i class="fa-solid fa-bars"></i>
+            </div>
           <div id="menu">
             <a href="#" class="menu-item" type="active">Home</a>
             <a href="#" class="menu-item">Discover</a>
@@ -156,6 +161,17 @@ async function loadHeroBanner() {
 
   const slideshow = document.querySelector('.slideshow');
 
+  function saveToLocalStorage(movie) {
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+  
+    if (!movieExists) {
+      watchlist.push(movie); // Add movie to watchlist
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated list
+    }
+  }
+  
+
   movies.forEach((movie, index) => {
     const slide = document.createElement('div');
     slide.classList.add('slide');
@@ -169,10 +185,24 @@ async function loadHeroBanner() {
          <div id="playBtn">
             <button id="playOne"><i class="fa-solid fa-circle-play"></i> Play Now</button>
             <button id="playThree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
-            <button id="playTwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
+            <button class="bookmark-btn" id="playTwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
           </div>
       </div>
     `;
+
+     // Add event listener to bookmark button
+     const bookmarkButton = slide.querySelector('.bookmark-btn');
+     bookmarkButton.addEventListener('click', () => {
+       // Toggle bookmark icon color
+       const icon = bookmarkButton.querySelector('i');
+       icon.classList.toggle('fa-regular');
+       icon.classList.toggle('fa-solid');
+       icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''; // Green when solid
+ 
+       // Save movie to localStorage
+       saveToLocalStorage(movie);
+     });
+
     slideshow.appendChild(slide);
   });
 
@@ -232,28 +262,56 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Populate the "Popular of the Week" section
-  async function populatePopularMovies() {
-    const movies = await fetchPopularMovies();
-    popularContainer.innerHTML = ""; // Clear any existing content
 
-    movies.forEach((movie, index) => {
-      const movieCard = document.createElement("div");
-      movieCard.classList.add("movie-card");
+  // Store watchlist in localStorage
+function saveToLocalStorage(movie) {
+  let watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve existing watchlist or create empty array
+  const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
 
-      movieCard.innerHTML = `
-        <div class="rank">${index + 1}</div>
-        <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}">
-        <div class="movie-details">
-          <h3>${movie.title}</h3>
-          <p>${movie.genre_ids.slice(0, 2).join(" • ")}</p>
-          <div class="rating">
-            <i class="fas fa-star"></i>| ${movie.vote_average.toFixed(1)}
-          </div>
-        </div>
-      `;
-      popularContainer.appendChild(movieCard);
-    });
+  if (!movieExists) {
+    watchlist.push(movie); // Add movie to watchlist
+    localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated list
   }
+}
+
+async function populatePopularMovies() {
+  const movies = await fetchPopularMovies();
+  popularContainer.innerHTML = ""; // Clear any existing content
+
+  movies.forEach((movie, index) => {
+    const movieCard = document.createElement("div");
+    movieCard.classList.add("movie-card");
+
+    movieCard.innerHTML = `
+      <div class="rank">${index + 1}</div>
+      <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}">
+      <div class="movie-details">
+        <h3>${movie.title}</h3>
+        <p>${movie.genre_ids.slice(0, 2).join(" • ")}</p>
+        <div class="rating">
+          <i class="fas fa-star"></i>| ${movie.vote_average.toFixed(1)}
+          <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button>
+        </div>
+      </div>
+    `;
+
+    // Add event listener to bookmark button
+    const bookmarkButton = movieCard.querySelector('.bookmark-btn');
+    bookmarkButton.addEventListener('click', () => {
+      // Toggle bookmark icon color
+      const icon = bookmarkButton.querySelector('i');
+      icon.classList.toggle('fa-regular');
+      icon.classList.toggle('fa-solid');
+      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''; // Green when solid
+
+      // Save movie to localStorage
+      saveToLocalStorage(movie);
+    });
+
+    popularContainer.appendChild(movieCard);
+  });
+}
+
 
   // Scroll functionality for "Popular of the Week" section
   const prevBtn = document.querySelector(".prev-btn");
@@ -295,30 +353,67 @@ document.addEventListener("DOMContentLoaded", async () => {
 } */
 
   async function loadCarousel(sectionId, endpoint) {
-    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
-    const data = await response.json();
-    const movies = data.results;
+    try {
+      const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
+      const data = await response.json();
+      const movies = data.results;
   
-    const carouselContainer = document.querySelector(`#${sectionId} .carousel-container`);
+      if (!movies || !Array.isArray(movies)) {
+        console.error("No movies found in the response");
+        return;
+      }
   
-    movies.forEach((movie) => {
-      const movieEl = document.createElement('div');
-      movieEl.classList.add('movie');
-      movieEl.innerHTML = `
-        <div class="movie-image">
-          <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
-          <div class="movie-overlay">
-            <h3>${movie.title}</h3>
-            <span>⭐ ${movie.vote_average.toFixed(1)}</span>
-          </div>
-        </div>
-      `;
-      carouselContainer.appendChild(movieEl);
-    });
-  
-    setupCarouselNavigation(sectionId);
-  }
+      const carouselContainer = document.querySelector(`#${sectionId} .carousel-container`);
+      if (!carouselContainer) {
+        console.error(`Carousel container not found for section: ${sectionId}`);
+        return;
+      }
+      
+      function saveToLocalStorage(movie) {
+        let watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve existing watchlist or create empty array
+        const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+      
+        if (!movieExists) {
+          watchlist.push(movie); // Add movie to watchlist
+          localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated list
+        }
+      }
 
+      movies.forEach((movie) => {
+        const movieEl = document.createElement('div');
+        movieEl.classList.add('movie');
+        movieEl.innerHTML = `
+          <div class="movie-image">
+            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+            <div class="movie-overlay">
+              <h3>${movie.title}</h3>
+              <span>⭐ ${movie.vote_average.toFixed(1)}</span>
+              <button class="bookmark-btn">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        `;
+  
+        const bookmarkButton = movieEl.querySelector('.bookmark-btn');
+        bookmarkButton.addEventListener('click', () => {
+          const icon = bookmarkButton.querySelector('i');
+          icon.classList.toggle('fa-regular');
+          icon.classList.toggle('fa-solid');
+          icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '';
+  
+          saveToLocalStorage(movie);
+        });
+
+  carouselContainer.appendChild(movieEl);
+});
+  
+      setupCarouselNavigation(sectionId);
+    } catch (error) {
+      console.error("Error loading carousel:", error);
+    }
+  }
+  
   // Fetch and populate a carousel
   async function loadCarouselWide(sectionId, endpoint) {
     const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
@@ -327,6 +422,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     const carouselContainer = document.querySelector(`#${sectionId} .carousel-container`);
   
+    function saveToLocalStorage(movie) {
+      let watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve existing watchlist or create empty array
+      const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+    
+      if (!movieExists) {
+        watchlist.push(movie); // Add movie to watchlist
+        localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated list
+      }
+    }
+    
+
     movies.forEach((movie) => {
       const movieEl = document.createElement('div');
       movieEl.classList.add('movie-wide');
@@ -335,10 +441,21 @@ document.addEventListener("DOMContentLoaded", async () => {
           <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
           <div class="movie-overlay-wide">
             <h3>${movie.title}</h3>
-            <span>⭐ ${movie.vote_average.toFixed(1)}</span>
+            <span>⭐ ${movie.vote_average.toFixed(1)}  <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button></span>
           </div>
         </div>
       `;
+
+      const bookmarkButton = movieEl.querySelector('.bookmark-btn');
+      bookmarkButton.addEventListener('click', () => {
+        const icon = bookmarkButton.querySelector('i');
+        icon.classList.toggle('fa-regular');
+        icon.classList.toggle('fa-solid');
+        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '';
+
+        saveToLocalStorage(movie);
+      }); 
+
       carouselContainer.appendChild(movieEl);
     });
   
@@ -368,6 +485,17 @@ async function loadBottomBanner() {
   const data = await response.json();
   const movies = data.results;
 
+
+  function saveToLocalStorage(movie) {
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+  
+    if (!movieExists) {
+      watchlist.push(movie); // Add movie to watchlist
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated list
+    }
+  }
+
   const slideshowContainer = document.querySelector('.slideshow-container');
   movies.slice(0, 10).forEach((movie) => { // Fetching the top 10 movies
     const slide = document.createElement('div');
@@ -378,11 +506,21 @@ async function loadBottomBanner() {
                            <div class="hero-bottom-details">
                            <div id="playBtnDown">
                             <button id="playOneDown"><i class="fa-solid fa-circle-play"></i> Play Now</button>                            
-                            <button id="playTwoDown"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
+                            <button class="bookmark-btn" id="playTwoDown"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
                           </div>
                        </div>
     
                         `;
+      const bookmarkButton = slide.querySelector('.bookmark-btn');
+      bookmarkButton.addEventListener('click', () => {
+        const icon = bookmarkButton.querySelector('i');
+        icon.classList.toggle('fa-regular');
+        icon.classList.toggle('fa-solid');
+        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '';
+
+        saveToLocalStorage(movie);
+      }); 
+
     slideshowContainer.appendChild(slide);
   });
 
@@ -447,6 +585,17 @@ function displaySearchResults(results) {
     return;
   }
 
+  function saveToLocalStorage(movie) {
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+  
+    if (!movieExists) {
+      watchlist.push(movie); // Add movie to watchlist
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated list
+    }
+  }
+  
+
   results.forEach((movie) => {
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie-result");
@@ -456,8 +605,20 @@ function displaySearchResults(results) {
       <div>
         <h3>${movie.title}</h3>
         <p>⭐ ${movie.vote_average.toFixed(1)} | Release Date: ${movie.release_date || "N/A"}</p>
+        <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button>
       </div>
     `;
+
+    const bookmarkButton = movieEl.querySelector('.bookmark-btn');
+      bookmarkButton.addEventListener('click', () => {
+        const icon = bookmarkButton.querySelector('i');
+        icon.classList.toggle('fa-regular');
+        icon.classList.toggle('fa-solid');
+        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '';
+
+        saveToLocalStorage(movie);
+      }); 
+
     searchResults.appendChild(movieEl);
   });
 }
@@ -468,7 +629,6 @@ document.addEventListener("click", (e) => {
     searchResults.style.display = "none";
   }
 });
-
 
 function init() {
   loadHeroBanner();
