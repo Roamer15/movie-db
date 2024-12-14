@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 body {
@@ -30,7 +30,7 @@ a:hover {
   color: #00925d;
 }
 
-a[type = "active"] {
+a[type="active"] {
   font-weight: bolder;
   font-size: 1.1rem;
 }
@@ -55,7 +55,7 @@ button:focus-visible {
 }
 
 #hero {
-  background-color:  #fffffccc;
+  background-color: #fffffccc;
 }
 
 #header {
@@ -80,8 +80,8 @@ button:focus-visible {
   cursor: pointer;
 }
 
-#buttons :hover{
-  color: #00925D;
+#buttons :hover {
+  color: #00925d;
 }
 
 #logo {
@@ -127,7 +127,7 @@ button:focus-visible {
 }
 
 #playOne {
-  background-color: #00925D;
+  background-color: #00925d;
   margin-right: 1rem;
   padding: 1rem;
 }
@@ -145,7 +145,6 @@ button:focus-visible {
   padding: 1rem;
   margin-right: 1rem;
 }
-
 
 /* Hero Banner */
 .hero-banner {
@@ -190,7 +189,11 @@ button:focus-visible {
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(to top, rgba(26, 26, 26, 1), rgba(26, 26, 26, 0)); /* Dark at bottom, fading to transparent */
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 26, 1),
+    rgba(26, 26, 26, 0)
+  ); /* Dark at bottom, fading to transparent */
   pointer-events: none;
 }
 
@@ -280,7 +283,7 @@ button:focus-visible {
 }
 
 .nav-btn.next {
-  right: 10px; 
+  right: 10px;
 }
 
 .nav-btn:hover {
@@ -290,7 +293,7 @@ button:focus-visible {
   margin: 50px 0;
   padding: 0 20px;
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .popular-section h2 {
@@ -472,7 +475,11 @@ button:focus-visible {
   left: 0;
   right: 0;
   height: 10%;
-  background: linear-gradient(to top, rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0)); /* Dark at bottom, fading to transparent */
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 26, 0.4),
+    rgba(26, 26, 26, 0)
+  ); /* Dark at bottom, fading to transparent */
   pointer-events: none;
 }
 
@@ -503,7 +510,7 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-} 
+}
 
 .movie-overlay {
   position: absolute;
@@ -652,7 +659,6 @@ button:focus-visible {
   overflow: hidden;
   position: relative;
   background-color: #1e1e1e;
-
 }
 
 /* Slideshow container */
@@ -693,7 +699,7 @@ button:focus-visible {
 }
 
 #playOneDown {
-  background-color: #00925D;
+  background-color: #00925d;
   margin-right: 1rem;
   padding: 1rem;
 }
@@ -738,7 +744,6 @@ button:focus-visible {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
-
 @media (max-width: 768px) {
   .slide-caption {
     font-size: 1rem;
@@ -746,9 +751,7 @@ button:focus-visible {
   }
 }
 
-
-
-.footer{
+.footer {
   border-top: 1px solid #f5efefd5;
   display: grid;
   grid-template-columns: 60% 30%;
@@ -766,10 +769,9 @@ button:focus-visible {
   font-weight: bolder;
 }
 
-.terms{
+.terms {
   margin: 1rem;
   font-size: 0.7rem;
-  
 
   ul {
     list-style: none;
@@ -797,7 +799,7 @@ button:focus-visible {
 
 #search-bar {
   display: none; /* Initially hidden */
-  opacity: 0;    /* Invisible */
+  opacity: 0; /* Invisible */
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
@@ -809,7 +811,7 @@ button:focus-visible {
   border: 2px solid #00925d;
   border-radius: 20px;
   padding: 0 10px;
-  font-size: 16px;           /* Fade in */
+  font-size: 16px; /* Fade in */
   background-color: transparent;
 }
 
@@ -827,7 +829,7 @@ button:focus-visible {
   z-index: 1000;
   padding: 20px;
   scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #007BFF #333; /* Thumb and track colors */
+  scrollbar-color: #007bff #333; /* Thumb and track colors */
 }
 
 #search-results .movie-result {
@@ -855,7 +857,7 @@ button:focus-visible {
 }
 
 #search-results::-webkit-scrollbar-thumb {
-  background-color: #007BFF; /* Scrollbar thumb color */
+  background-color: #007bff; /* Scrollbar thumb color */
   border-radius: 10px;
   border: 2px solid #333;
 }
@@ -867,8 +869,6 @@ button:focus-visible {
 .bars {
   display: none;
 }
-
-
 
 /* Media Queries */
 
@@ -889,7 +889,7 @@ button:focus-visible {
     height: 30px;
     padding: 0 5px;
     font-size: 12px;
-}
+  }
 
   .header-btn {
     display: none;
@@ -924,29 +924,29 @@ button:focus-visible {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 20px 0; 
+    padding: 20px 0;
   }
-  
+
   #movie-partners img {
     width: 100px; /* Adjust as needed */
     height: auto;
-    margin-right: 20px; 
+    margin-right: 20px;
   }
 
   .genres {
     display: flex;
     flex-wrap: wrap; /* Allow elements to wrap to the next line */
-    justify-content: center; /* Center the boxes horizontally */ 
+    justify-content: center; /* Center the boxes horizontally */
   }
-  
+
   .genreBox {
     background-color: #333; /* Example background color */
     color: #fff;
-    padding: 10px 15px; 
-    margin: 5px; 
+    padding: 10px 15px;
+    margin: 5px;
     border-radius: 5px;
     text-align: center;
-    font-size: 14px; 
+    font-size: 14px;
   }
 
   .footer {
