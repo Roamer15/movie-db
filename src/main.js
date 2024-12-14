@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.css"
 
 document.querySelector("#app").innerHTML = `
       <div id="header">
@@ -145,36 +145,36 @@ document.querySelector("#app").innerHTML = `
         </div>
       </section>
 
-`;
+`
 
-const API_KEY = "de8d95a8fd855c524e4704e6647ae343";
-const BASE_URL = "https://api.themoviedb.org/3";
-const IMG_PATH = "https://image.tmdb.org/t/p/w500";
+const API_KEY = "de8d95a8fd855c524e4704e6647ae343"
+const BASE_URL = "https://api.themoviedb.org/3"
+const IMG_PATH = "https://image.tmdb.org/t/p/w500"
 
 // Fetch and populate hero banner
 async function loadHeroBanner() {
   const response = await fetch(
     `${BASE_URL}/movie/now_playing?api_key=${API_KEY}`
-  );
-  const data = await response.json();
-  const movies = data.results.slice(0, 4);
+  )
+  const data = await response.json()
+  const movies = data.results.slice(0, 4)
 
-  const slideshow = document.querySelector(".slideshow");
+  const slideshow = document.querySelector(".slideshow")
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
       watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
+      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   movies.forEach((movie, index) => {
-    const slide = document.createElement("div");
-    slide.classList.add("slide");
-    if (index === 0) slide.classList.add("active"); // Set the first slide as active
+    const slide = document.createElement("div")
+    slide.classList.add("slide")
+    if (index === 0) slide.classList.add("active") // Set the first slide as active
 
     slide.innerHTML = `
       <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}">
@@ -187,98 +187,98 @@ async function loadHeroBanner() {
             <button class="bookmark-btn" id="playTwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
           </div>
       </div>
-    `;
+    `
 
     // Add event listener to bookmark button
-    const bookmarkButton = slide.querySelector(".bookmark-btn");
+    const bookmarkButton = slide.querySelector(".bookmark-btn")
     bookmarkButton.addEventListener("click", () => {
       // Toggle bookmark icon color
-      const icon = bookmarkButton.querySelector("i");
-      icon.classList.toggle("fa-regular");
-      icon.classList.toggle("fa-solid");
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""; // Green when solid
+      const icon = bookmarkButton.querySelector("i")
+      icon.classList.toggle("fa-regular")
+      icon.classList.toggle("fa-solid")
+      icon.style.color = icon.classList.contains("fa-solid") ? "green" : "" // Green when solid
 
       // Save movie to localStorage
-      saveToLocalStorage(movie);
+      saveToLocalStorage(movie)
     });
 
-    slideshow.appendChild(slide);
+    slideshow.appendChild(slide)
   });
 
-  setupHeroNavigation();
+  setupHeroNavigation()
 }
 
 // Hero banner navigation
 function setupHeroNavigation() {
   const slides = document.querySelectorAll(".slide");
-  const prevBtn = document.querySelector(".navigation .prev");
-  const nextBtn = document.querySelector(".navigation .next");
+  const prevBtn = document.querySelector(".navigation .prev")
+  const nextBtn = document.querySelector(".navigation .next")
 
-  let currentSlide = 0;
+  let currentSlide = 0
 
   function showSlide(index) {
-    slides[currentSlide].classList.remove("active");
-    currentSlide = (index + slides.length) % slides.length;
-    slides[currentSlide].classList.add("active");
+    slides[currentSlide].classList.remove("active")
+    currentSlide = (index + slides.length) % slides.length
+    slides[currentSlide].classList.add("active")
   }
 
-  prevBtn.addEventListener("click", () => showSlide(currentSlide - 1));
-  nextBtn.addEventListener("click", () => showSlide(currentSlide + 1));
+  prevBtn.addEventListener("click", () => showSlide(currentSlide - 1))
+  nextBtn.addEventListener("click", () => showSlide(currentSlide + 1))
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".nav-btn");
+  const buttons = document.querySelectorAll(".nav-btn")
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      const carouselId = button.getAttribute("data-carousel");
-      const carousel = document.getElementById(carouselId);
+      const carouselId = button.getAttribute("data-carousel")
+      const carousel = document.getElementById(carouselId)
       const scrollAmount = carousel.offsetWidth; // Scroll by one carousel width
 
       if (button.classList.contains("prev")) {
-        carousel.scrollLeft -= scrollAmount;
+        carousel.scrollLeft -= scrollAmount
       } else if (button.classList.contains("next")) {
-        carousel.scrollLeft += scrollAmount;
+        carousel.scrollLeft += scrollAmount
       }
-    });
-  });
-});
+    })
+  })
+})
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const API_KEY = "de8d95a8fd855c524e4704e6647ae343";
-  const BASE_URL = "https://api.themoviedb.org/3";
-  const IMG_PATH = "https://image.tmdb.org/t/p/w500";
-  const popularContainer = document.querySelector(".popular-items");
+  const API_KEY = "de8d95a8fd855c524e4704e6647ae343"
+  const BASE_URL = "https://api.themoviedb.org/3"
+  const IMG_PATH = "https://image.tmdb.org/t/p/w500"
+  const popularContainer = document.querySelector(".popular-items")
 
   // Fetch data for "Popular This Week"
   async function fetchPopularMovies() {
     const response = await fetch(
       `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
     );
-    const data = await response.json();
-    return data.results.slice(0, 18); // Fetch the top 10 popular movies
+    const data = await response.json()
+    return data.results.slice(0, 18) // Fetch the top 10 popular movies
   }
 
   // Populate the "Popular of the Week" section
 
   // Store watchlist in localStorage
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
-      watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
+      watchlist.push(movie) // Add movie to watchlist
+      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   async function populatePopularMovies() {
-    const movies = await fetchPopularMovies();
-    popularContainer.innerHTML = ""; // Clear any existing content
+    const movies = await fetchPopularMovies()
+    popularContainer.innerHTML = "" // Clear any existing content
 
     movies.forEach((movie, index) => {
-      const movieCard = document.createElement("div");
-      movieCard.classList.add("movie-card");
+      const movieCard = document.createElement("div")
+      movieCard.classList.add("movie-card")
 
       movieCard.innerHTML = `
       <div class="rank">${index + 1}</div>
@@ -291,40 +291,40 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button>
         </div>
       </div>
-    `;
+    `
 
       // Add event listener to bookmark button
-      const bookmarkButton = movieCard.querySelector(".bookmark-btn");
+      const bookmarkButton = movieCard.querySelector(".bookmark-btn")
       bookmarkButton.addEventListener("click", () => {
         // Toggle bookmark icon color
-        const icon = bookmarkButton.querySelector("i");
-        icon.classList.toggle("fa-regular");
-        icon.classList.toggle("fa-solid");
-        icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""; // Green when solid
+        const icon = bookmarkButton.querySelector("i")
+        icon.classList.toggle("fa-regular")
+        icon.classList.toggle("fa-solid")
+        icon.style.color = icon.classList.contains("fa-solid") ? "green" : "" // Green when solid
 
         // Save movie to localStorage
-        saveToLocalStorage(movie);
-      });
+        saveToLocalStorage(movie)
+      })
 
-      popularContainer.appendChild(movieCard);
-    });
+      popularContainer.appendChild(movieCard)
+    })
   }
 
   // Scroll functionality for "Popular of the Week" section
-  const prevBtn = document.querySelector(".prev-btn");
-  const nextBtn = document.querySelector(".next-btn");
+  const prevBtn = document.querySelector(".prev-btn")
+  const nextBtn = document.querySelector(".next-btn")
 
   prevBtn.addEventListener("click", () => {
-    popularContainer.scrollLeft -= 300;
-  });
+    popularContainer.scrollLeft -= 300
+  })
 
   nextBtn.addEventListener("click", () => {
-    popularContainer.scrollLeft += 300;
-  });
+    popularContainer.scrollLeft += 300
+  })
 
   // Initialize the section
-  populatePopularMovies();
-});
+  populatePopularMovies()
+})
 
 // Fetch and populate a carousel
 /* async function loadCarousel(sectionId, endpoint) {
@@ -351,36 +351,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function loadCarousel(sectionId, endpoint) {
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
-    const data = await response.json();
-    const movies = data.results;
+    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`)
+    const data = await response.json()
+    const movies = data.results
 
     if (!movies || !Array.isArray(movies)) {
-      console.error("No movies found in the response");
-      return;
+      console.error("No movies found in the response")
+      return
     }
 
     const carouselContainer = document.querySelector(
       `#${sectionId} .carousel-container`
     );
     if (!carouselContainer) {
-      console.error(`Carousel container not found for section: ${sectionId}`);
-      return;
+      console.error(`Carousel container not found for section: ${sectionId}`)
+      return
     }
 
     function saveToLocalStorage(movie) {
-      let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
-      const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+      let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+      const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
       if (!movieExists) {
-        watchlist.push(movie); // Add movie to watchlist
-        localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
+        watchlist.push(movie) // Add movie to watchlist
+        localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
       }
     }
 
     movies.forEach((movie) => {
-      const movieEl = document.createElement("div");
-      movieEl.classList.add("movie");
+      const movieEl = document.createElement("div")
+      movieEl.classList.add("movie")
       movieEl.innerHTML = `
           <div class="movie-image">
             <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
@@ -392,50 +392,50 @@ async function loadCarousel(sectionId, endpoint) {
               </button>
             </div>
           </div>
-        `;
+        `
 
-      const bookmarkButton = movieEl.querySelector(".bookmark-btn");
+      const bookmarkButton = movieEl.querySelector(".bookmark-btn")
       bookmarkButton.addEventListener("click", () => {
         const icon = bookmarkButton.querySelector("i");
-        icon.classList.toggle("fa-regular");
-        icon.classList.toggle("fa-solid");
-        icon.style.color = icon.classList.contains("fa-solid") ? "green" : "";
+        icon.classList.toggle("fa-regular")
+        icon.classList.toggle("fa-solid")
+        icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
 
-        saveToLocalStorage(movie);
-      });
+        saveToLocalStorage(movie)
+      })
 
-      carouselContainer.appendChild(movieEl);
-    });
+      carouselContainer.appendChild(movieEl)
+    })
 
-    setupCarouselNavigation(sectionId);
+    setupCarouselNavigation(sectionId)
   } catch (error) {
-    console.error("Error loading carousel:", error);
+    console.error("Error loading carousel:", error)
   }
 }
 
 // Fetch and populate a carousel
 async function loadCarouselWide(sectionId, endpoint) {
-  const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
-  const data = await response.json();
-  const movies = data.results;
+  const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`)
+  const data = await response.json()
+  const movies = data.results
 
   const carouselContainer = document.querySelector(
     `#${sectionId} .carousel-container`
-  );
+  )
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
-      watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
+      watchlist.push(movie) // Add movie to watchlist
+      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   movies.forEach((movie) => {
-    const movieEl = document.createElement("div");
-    movieEl.classList.add("movie-wide");
+    const movieEl = document.createElement("div")
+    movieEl.classList.add("movie-wide")
     movieEl.innerHTML = `
         <div class="movie-img">
           <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
@@ -446,64 +446,64 @@ async function loadCarouselWide(sectionId, endpoint) {
             )}  <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button></span>
           </div>
         </div>
-      `;
+      `
 
-    const bookmarkButton = movieEl.querySelector(".bookmark-btn");
+    const bookmarkButton = movieEl.querySelector(".bookmark-btn")
     bookmarkButton.addEventListener("click", () => {
-      const icon = bookmarkButton.querySelector("i");
-      icon.classList.toggle("fa-regular");
-      icon.classList.toggle("fa-solid");
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : "";
+      const icon = bookmarkButton.querySelector("i")
+      icon.classList.toggle("fa-regular")
+      icon.classList.toggle("fa-solid")
+      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
 
-      saveToLocalStorage(movie);
-    });
+      saveToLocalStorage(movie)
+    })
 
-    carouselContainer.appendChild(movieEl);
-  });
+    carouselContainer.appendChild(movieEl)
+  })
 
-  setupCarouselNavigation(sectionId);
+  setupCarouselNavigation(sectionId)
 }
 
 // Carousel navigation
 function setupCarouselNavigation(sectionId) {
-  const carousel = document.querySelector(`#${sectionId} .carousel-container`);
-  const prevBtn = document.querySelector(`#${sectionId} .carousel-button.prev`);
-  const nextBtn = document.querySelector(`#${sectionId} .carousel-button.next`);
+  const carousel = document.querySelector(`#${sectionId} .carousel-container`)
+  const prevBtn = document.querySelector(`#${sectionId} .carousel-button.prev`)
+  const nextBtn = document.querySelector(`#${sectionId} .carousel-button.next`)
 
   prevBtn.addEventListener("click", () => {
-    carousel.scrollBy({ left: -300, behavior: "smooth" });
-  });
+    carousel.scrollBy({ left: -300, behavior: "smooth" })
+  })
 
   nextBtn.addEventListener("click", () => {
-    carousel.scrollBy({ left: 300, behavior: "smooth" });
-  });
+    carousel.scrollBy({ left: 300, behavior: "smooth" })
+  })
 }
 
-const FAVORITE_ENDPOINT = "/movie/top_rated"; // Example: Fetching top-rated movies
+const FAVORITE_ENDPOINT = "/movie/top_rated" // Example: Fetching top-rated movies
 
 async function loadBottomBanner() {
   const response = await fetch(
     `${BASE_URL}${FAVORITE_ENDPOINT}?api_key=${API_KEY}`
-  );
-  const data = await response.json();
-  const movies = data.results;
+  )
+  const data = await response.json()
+  const movies = data.results
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
-      watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
+      watchlist.push(movie) // Add movie to watchlist
+      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
     }
   }
 
-  const slideshowContainer = document.querySelector(".slideshow-container");
+  const slideshowContainer = document.querySelector(".slideshow-container")
   movies.slice(0, 10).forEach((movie) => {
     // Fetching the top 10 movies
-    const slide = document.createElement("div");
-    slide.classList.add("slide");
-    slide.style.backgroundImage = `url(${IMG_PATH}${movie.backdrop_path})`; // Use backdrop image
+    const slide = document.createElement("div")
+    slide.classList.add("slide")
+    slide.style.backgroundImage = `url(${IMG_PATH}${movie.backdrop_path})` // Use backdrop image
     slide.innerHTML = `
                         <div class="slide-caption">${movie.title}</div>
                            <div class="hero-bottom-details">
@@ -513,95 +513,95 @@ async function loadBottomBanner() {
                           </div>
                        </div>
     
-                        `;
-    const bookmarkButton = slide.querySelector(".bookmark-btn");
+                        `
+    const bookmarkButton = slide.querySelector(".bookmark-btn")
     bookmarkButton.addEventListener("click", () => {
-      const icon = bookmarkButton.querySelector("i");
-      icon.classList.toggle("fa-regular");
-      icon.classList.toggle("fa-solid");
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : "";
+      const icon = bookmarkButton.querySelector("i")
+      icon.classList.toggle("fa-regular")
+      icon.classList.toggle("fa-solid")
+      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
 
-      saveToLocalStorage(movie);
-    });
+      saveToLocalStorage(movie)
+    })
 
-    slideshowContainer.appendChild(slide);
-  });
+    slideshowContainer.appendChild(slide)
+  })
 
-  autoSlide();
+  autoSlide()
 }
 
 function autoSlide() {
-  const slides = document.querySelectorAll(".slide");
-  let index = 0;
+  const slides = document.querySelectorAll(".slide")
+  let index = 0
 
   setInterval(() => {
     slides.forEach((slide, i) => {
-      slide.style.transform = `translateX(-${100 * index}%)`;
-    });
-    index = (index + 1) % (slides.length - 1); // Loop back to the first slide
-  }, 5000); // Change slide every 5 seconds
+      slide.style.transform = `translateX(-${100 * index}%)`
+    })
+    index = (index + 1) % (slides.length - 1) // Loop back to the first slide
+  }, 5000) // Change slide every 5 seconds
 }
 
 // Load the bottom banner on page load
-loadBottomBanner();
+loadBottomBanner()
 
-const searchBtn = document.getElementById("search-btn");
-const searchBar = document.getElementById("search-bar");
+const searchBtn = document.getElementById("search-btn")
+const searchBar = document.getElementById("search-bar")
 
 searchBtn.addEventListener("click", () => {
-  searchBar.classList.toggle("active");
-});
+  searchBar.classList.toggle("active")
+})
 
-const searchResults = document.getElementById("search-results");
+const searchResults = document.getElementById("search-results")
 
 // Handle search and fetch results
 searchBar.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
-    const query = searchBar.value.trim().toLowerCase();
+    const query = searchBar.value.trim().toLowerCase()
     if (query) {
-      await fetchSearchResults(query);
-      searchResults.style.display = "block"; // Show search results
-      searchResults.style.overflowY = "scroll";
+      await fetchSearchResults(query)
+      searchResults.style.display = "block" // Show search results
+      searchResults.style.overflowY = "scroll"
     } else {
-      searchResults.style.display = "none"; // Hide search results when no query is provided
+      searchResults.style.display = "none" // Hide search results when no query is provided
     }
   }
-});
+})
 
 // Fetch movie data from TMDB
 async function fetchSearchResults(query) {
   try {
     const response = await fetch(
       `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`
-    );
-    const data = await response.json();
-    displaySearchResults(data.results);
+    )
+    const data = await response.json()
+    displaySearchResults(data.results)
   } catch (error) {
-    console.error("Error fetching search results:", error);
+    console.error("Error fetching search results:", error)
   }
 }
 
 // Display results in the overlay
 function displaySearchResults(results) {
-  searchResults.innerHTML = ""; // Clear previous results
+  searchResults.innerHTML = "" // Clear previous results
   if (results.length === 0) {
-    searchResults.innerHTML = "<p>No results found.</p>";
-    return;
+    searchResults.innerHTML = "<p>No results found.</p>"
+    return
   }
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
-      watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
+      watchlist.push(movie) // Add movie to watchlist
+      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   results.forEach((movie) => {
-    const movieEl = document.createElement("div");
-    movieEl.classList.add("movie-result");
+    const movieEl = document.createElement("div")
+    movieEl.classList.add("movie-result")
     movieEl.innerHTML = `
       <img src="${
         movie.poster_path
@@ -616,34 +616,34 @@ function displaySearchResults(results) {
     }</p>
         <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button>
       </div>
-    `;
+    `
 
-    const bookmarkButton = movieEl.querySelector(".bookmark-btn");
+    const bookmarkButton = movieEl.querySelector(".bookmark-btn")
     bookmarkButton.addEventListener("click", () => {
-      const icon = bookmarkButton.querySelector("i");
-      icon.classList.toggle("fa-regular");
-      icon.classList.toggle("fa-solid");
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : "";
+      const icon = bookmarkButton.querySelector("i")
+      icon.classList.toggle("fa-regular")
+      icon.classList.toggle("fa-solid")
+      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
 
-      saveToLocalStorage(movie);
-    });
+      saveToLocalStorage(movie)
+    })
 
-    searchResults.appendChild(movieEl);
-  });
+    searchResults.appendChild(movieEl)
+  })
 }
 
 // Close the overlay when clicking outside
 document.addEventListener("click", (e) => {
   if (!searchResults.contains(e.target) && !searchBar.contains(e.target)) {
-    searchResults.style.display = "none";
+    searchResults.style.display = "none"
   }
-});
+})
 
 function init() {
   loadHeroBanner();
-  loadCarousel("just-released", "/movie/upcoming");
-  loadCarouselWide("watchlist", "/movie/top_rated");
-  loadCarouselWide("mostLiked", "/movie/popular");
+  loadCarousel("just-released", "/movie/upcoming")
+  loadCarouselWide("watchlist", "/movie/top_rated")
+  loadCarouselWide("mostLiked", "/movie/popular")
 }
 
-init();
+init()
