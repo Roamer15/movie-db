@@ -1,6 +1,6 @@
-import "./style.css"
+import './style.css'
 
-document.querySelector("#app").innerHTML = `
+document.querySelector('#app').innerHTML = `
       <div id="header">
           <div id="logo">
             <img src="./public/images/Logo.png" alt="logo" id="symbol">
@@ -152,7 +152,7 @@ const BASE_URL = 'https://api.themoviedb.org/3'
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
 // Fetch and populate hero banner
-async function loadHeroBanner() {
+async function loadHeroBanner () {
   const response = await fetch(
     `${BASE_URL}/movie/now_playing?api_key=${API_KEY}`
   )
@@ -171,13 +171,14 @@ async function loadHeroBanner() {
     }
   }
 
+
   movies.forEach((movie, index) => {
     const slide = document.createElement('div')
     slide.classList.add('slide')
     if (index === 0) slide.classList.add('active') // Set the first slide as active
 
     slide.innerHTML = `
-      <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}">
+      <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH}${movie.backdrop_path})">
       <div class="hero-details">
         <h1>${movie.title}</h1>
         <p>${movie.overview}</p>
@@ -282,7 +283,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       movieCard.innerHTML = `
       <div class="rank">${index + 1}</div>
-      <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}">
+      <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH + movie.poster_path})">
       <div class="movie-details">
         <h3>${movie.title}</h3>
         <p>${movie.genre_ids.slice(0, 2).join(" • ")}</p>
@@ -327,27 +328,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 // Fetch and populate a carousel
-/* async function loadCarousel(sectionId, endpoint) {
-  const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
-  const data = await response.json();
-  const movies = data.results;
-
-  const carouselContainer = document.querySelector(`#${sectionId} .carousel-container`);
-
-  movies.forEach((movie) => {
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('movie');
-    movieEl.innerHTML = `
-      <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
-      <div class="pg">PG-13</div>
-      <h3>${movie.title}</h3>
-      <span>⭐ ${movie.vote_average.toFixed(1)} | Movie</span>
-    `;
-    carouselContainer.appendChild(movieEl);
-  });
-
-  setupCarouselNavigation(sectionId);
-} */
 
 async function loadCarousel(sectionId, endpoint) {
   try {
@@ -383,7 +363,7 @@ async function loadCarousel(sectionId, endpoint) {
       movieEl.classList.add('movie')
       movieEl.innerHTML = `
           <div class="movie-image">
-            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH}${movie.poster_path})">
             <div class="movie-overlay">
               <h3>${movie.title}</h3>
               <span>⭐ ${movie.vote_average.toFixed(1)}</span>
@@ -438,7 +418,7 @@ async function loadCarouselWide(sectionId, endpoint) {
     movieEl.classList.add('movie-wide')
     movieEl.innerHTML = `
         <div class="movie-img">
-          <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+          <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH}${movie.poster_path})">
           <div class="movie-overlay-wide">
             <h3>${movie.title}</h3>
             <span>⭐ ${movie.vote_average.toFixed(
@@ -505,7 +485,7 @@ async function loadBottomBanner() {
     slide.classList.add('slide')
     slide.style.backgroundImage = `url(${IMG_PATH}${movie.backdrop_path})` // Use backdrop image
     slide.innerHTML = `
-                        <div class="slide-caption">${movie.title}</div>
+                        <div class="slide-caption" onclick="reDirect(${IMG_PATH}${movie.backdrop_path})">${movie.title}</div>
                            <div class="hero-bottom-details">
                            <div id="playBtnDown">
                             <button id="playOneDown"><i class="fa-solid fa-circle-play"></i> Play Now</button>                            
@@ -608,7 +588,11 @@ function displaySearchResults(results) {
           ? IMG_PATH + movie.poster_path
           : 'https://via.placeholder.com/100'
       }" 
-           alt="${movie.title}">
+           alt="${movie.title}" onclick="reDirect(${
+            movie.poster_path
+              ? IMG_PATH + movie.poster_path
+              : 'https://via.placeholder.com/100'
+          })">
       <div>
         <h3>${movie.title}</h3>
         <p>⭐ ${movie.vote_average.toFixed(1)} | Release Date: ${
@@ -647,3 +631,12 @@ function init() {
 }
 
 init()
+
+
+  function reDirect(image) {
+    window.location.href = 'preview.html'
+    window.location.href.style.backgroundImage = image
+  }
+
+
+reDirect()
