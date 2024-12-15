@@ -147,9 +147,9 @@ document.querySelector("#app").innerHTML = `
 
 `
 
-const API_KEY = "de8d95a8fd855c524e4704e6647ae343"
-const BASE_URL = "https://api.themoviedb.org/3"
-const IMG_PATH = "https://image.tmdb.org/t/p/w500"
+const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
+const BASE_URL = 'https://api.themoviedb.org/3'
+const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
 // Fetch and populate hero banner
 async function loadHeroBanner() {
@@ -159,22 +159,22 @@ async function loadHeroBanner() {
   const data = await response.json()
   const movies = data.results.slice(0, 4)
 
-  const slideshow = document.querySelector(".slideshow")
+  const slideshow = document.querySelector('.slideshow')
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
     const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
       watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   movies.forEach((movie, index) => {
-    const slide = document.createElement("div")
-    slide.classList.add("slide")
-    if (index === 0) slide.classList.add("active") // Set the first slide as active
+    const slide = document.createElement('div')
+    slide.classList.add('slide')
+    if (index === 0) slide.classList.add('active') // Set the first slide as active
 
     slide.innerHTML = `
       <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}">
@@ -190,13 +190,13 @@ async function loadHeroBanner() {
     `
 
     // Add event listener to bookmark button
-    const bookmarkButton = slide.querySelector(".bookmark-btn")
-    bookmarkButton.addEventListener("click", () => {
+    const bookmarkButton = slide.querySelector('.bookmark-btn')
+    bookmarkButton.addEventListener('click', () => {
       // Toggle bookmark icon color
-      const icon = bookmarkButton.querySelector("i")
-      icon.classList.toggle("fa-regular")
-      icon.classList.toggle("fa-solid")
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : "" // Green when solid
+      const icon = bookmarkButton.querySelector('i')
+      icon.classList.toggle('fa-regular')
+      icon.classList.toggle('fa-solid')
+      icon.style.color = icon.classList.contains("fa-solid") ? 'green' : '' // Green when solid
 
       // Save movie to localStorage
       saveToLocalStorage(movie)
@@ -210,45 +210,45 @@ async function loadHeroBanner() {
 
 // Hero banner navigation
 function setupHeroNavigation() {
-  const slides = document.querySelectorAll(".slide");
-  const prevBtn = document.querySelector(".navigation .prev")
-  const nextBtn = document.querySelector(".navigation .next")
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.querySelector('.navigation .prev')
+  const nextBtn = document.querySelector('.navigation .next')
 
   let currentSlide = 0
 
   function showSlide(index) {
-    slides[currentSlide].classList.remove("active")
+    slides[currentSlide].classList.remove('active')
     currentSlide = (index + slides.length) % slides.length
-    slides[currentSlide].classList.add("active")
+    slides[currentSlide].classList.add('active')
   }
 
-  prevBtn.addEventListener("click", () => showSlide(currentSlide - 1))
-  nextBtn.addEventListener("click", () => showSlide(currentSlide + 1))
+  prevBtn.addEventListener('click', () => showSlide(currentSlide - 1))
+  nextBtn.addEventListener('click', () => showSlide(currentSlide + 1))
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".nav-btn")
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.nav-btn')
 
   buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const carouselId = button.getAttribute("data-carousel")
+    button.addEventListener('click', () => {
+      const carouselId = button.getAttribute('data-carousel')
       const carousel = document.getElementById(carouselId)
       const scrollAmount = carousel.offsetWidth; // Scroll by one carousel width
 
-      if (button.classList.contains("prev")) {
+      if (button.classList.contains('prev')) {
         carousel.scrollLeft -= scrollAmount
-      } else if (button.classList.contains("next")) {
+      } else if (button.classList.contains('next')) {
         carousel.scrollLeft += scrollAmount
       }
     })
   })
 })
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const API_KEY = "de8d95a8fd855c524e4704e6647ae343"
-  const BASE_URL = "https://api.themoviedb.org/3"
-  const IMG_PATH = "https://image.tmdb.org/t/p/w500"
-  const popularContainer = document.querySelector(".popular-items")
+document.addEventListener('DOMContentLoaded', async () => {
+  const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
+  const BASE_URL = 'https://api.themoviedb.org/3'
+  const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
+  const popularContainer = document.querySelector('.popular-items')
 
   // Fetch data for "Popular This Week"
   async function fetchPopularMovies() {
@@ -263,22 +263,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Store watchlist in localStorage
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
     const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
       watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   async function populatePopularMovies() {
     const movies = await fetchPopularMovies()
-    popularContainer.innerHTML = "" // Clear any existing content
+    popularContainer.innerHTML = '' // Clear any existing content
 
     movies.forEach((movie, index) => {
-      const movieCard = document.createElement("div")
-      movieCard.classList.add("movie-card")
+      const movieCard = document.createElement('div')
+      movieCard.classList.add('movie-card')
 
       movieCard.innerHTML = `
       <div class="rank">${index + 1}</div>
@@ -294,13 +294,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     `
 
       // Add event listener to bookmark button
-      const bookmarkButton = movieCard.querySelector(".bookmark-btn")
-      bookmarkButton.addEventListener("click", () => {
+      const bookmarkButton = movieCard.querySelector('.bookmark-btn')
+      bookmarkButton.addEventListener('click', () => {
         // Toggle bookmark icon color
-        const icon = bookmarkButton.querySelector("i")
-        icon.classList.toggle("fa-regular")
-        icon.classList.toggle("fa-solid")
-        icon.style.color = icon.classList.contains("fa-solid") ? "green" : "" // Green when solid
+        const icon = bookmarkButton.querySelector('i')
+        icon.classList.toggle('fa-regular')
+        icon.classList.toggle('fa-solid')
+        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green when solid
 
         // Save movie to localStorage
         saveToLocalStorage(movie)
@@ -311,14 +311,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Scroll functionality for "Popular of the Week" section
-  const prevBtn = document.querySelector(".prev-btn")
-  const nextBtn = document.querySelector(".next-btn")
+  const prevBtn = document.querySelector('.prev-btn')
+  const nextBtn = document.querySelector('.next-btn')
 
-  prevBtn.addEventListener("click", () => {
+  prevBtn.addEventListener('click', () => {
     popularContainer.scrollLeft -= 300
   })
 
-  nextBtn.addEventListener("click", () => {
+  nextBtn.addEventListener('click', () => {
     popularContainer.scrollLeft += 300
   })
 
@@ -356,7 +356,7 @@ async function loadCarousel(sectionId, endpoint) {
     const movies = data.results
 
     if (!movies || !Array.isArray(movies)) {
-      console.error("No movies found in the response")
+      console.error('No movies found in the response')
       return
     }
 
@@ -369,18 +369,18 @@ async function loadCarousel(sectionId, endpoint) {
     }
 
     function saveToLocalStorage(movie) {
-      let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+      let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
       const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
       if (!movieExists) {
         watchlist.push(movie) // Add movie to watchlist
-        localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
+        localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
       }
     }
 
     movies.forEach((movie) => {
-      const movieEl = document.createElement("div")
-      movieEl.classList.add("movie")
+      const movieEl = document.createElement('div')
+      movieEl.classList.add('movie')
       movieEl.innerHTML = `
           <div class="movie-image">
             <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
@@ -394,12 +394,12 @@ async function loadCarousel(sectionId, endpoint) {
           </div>
         `
 
-      const bookmarkButton = movieEl.querySelector(".bookmark-btn")
-      bookmarkButton.addEventListener("click", () => {
-        const icon = bookmarkButton.querySelector("i");
-        icon.classList.toggle("fa-regular")
-        icon.classList.toggle("fa-solid")
-        icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
+      const bookmarkButton = movieEl.querySelector('.bookmark-btn')
+      bookmarkButton.addEventListener('click', () => {
+        const icon = bookmarkButton.querySelector('i');
+        icon.classList.toggle('fa-regular')
+        icon.classList.toggle('fa-solid')
+        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
 
         saveToLocalStorage(movie)
       })
@@ -409,7 +409,7 @@ async function loadCarousel(sectionId, endpoint) {
 
     setupCarouselNavigation(sectionId)
   } catch (error) {
-    console.error("Error loading carousel:", error)
+    console.error('Error loading carousel:', error)
   }
 }
 
@@ -424,18 +424,18 @@ async function loadCarouselWide(sectionId, endpoint) {
   )
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
     const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
       watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   movies.forEach((movie) => {
-    const movieEl = document.createElement("div")
-    movieEl.classList.add("movie-wide")
+    const movieEl = document.createElement('div')
+    movieEl.classList.add('movie-wide')
     movieEl.innerHTML = `
         <div class="movie-img">
           <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
@@ -448,12 +448,12 @@ async function loadCarouselWide(sectionId, endpoint) {
         </div>
       `
 
-    const bookmarkButton = movieEl.querySelector(".bookmark-btn")
-    bookmarkButton.addEventListener("click", () => {
-      const icon = bookmarkButton.querySelector("i")
-      icon.classList.toggle("fa-regular")
-      icon.classList.toggle("fa-solid")
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
+    const bookmarkButton = movieEl.querySelector('.bookmark-btn')
+    bookmarkButton.addEventListener('click', () => {
+      const icon = bookmarkButton.querySelector('i')
+      icon.classList.toggle('fa-regular')
+      icon.classList.toggle('fa-solid')
+      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
 
       saveToLocalStorage(movie)
     })
@@ -470,16 +470,16 @@ function setupCarouselNavigation(sectionId) {
   const prevBtn = document.querySelector(`#${sectionId} .carousel-button.prev`)
   const nextBtn = document.querySelector(`#${sectionId} .carousel-button.next`)
 
-  prevBtn.addEventListener("click", () => {
-    carousel.scrollBy({ left: -300, behavior: "smooth" })
+  prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -300, behavior: 'smooth' })
   })
 
-  nextBtn.addEventListener("click", () => {
-    carousel.scrollBy({ left: 300, behavior: "smooth" })
+  nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: 300, behavior: 'smooth' })
   })
 }
 
-const FAVORITE_ENDPOINT = "/movie/top_rated" // Example: Fetching top-rated movies
+const FAVORITE_ENDPOINT = '/movie/top_rated' // Example: Fetching top-rated movies
 
 async function loadBottomBanner() {
   const response = await fetch(
@@ -489,20 +489,20 @@ async function loadBottomBanner() {
   const movies = data.results
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
     const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
       watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
     }
   }
 
-  const slideshowContainer = document.querySelector(".slideshow-container")
+  const slideshowContainer = document.querySelector('.slideshow-container')
   movies.slice(0, 10).forEach((movie) => {
     // Fetching the top 10 movies
     const slide = document.createElement("div")
-    slide.classList.add("slide")
+    slide.classList.add('slide')
     slide.style.backgroundImage = `url(${IMG_PATH}${movie.backdrop_path})` // Use backdrop image
     slide.innerHTML = `
                         <div class="slide-caption">${movie.title}</div>
@@ -514,12 +514,12 @@ async function loadBottomBanner() {
                        </div>
     
                         `
-    const bookmarkButton = slide.querySelector(".bookmark-btn")
-    bookmarkButton.addEventListener("click", () => {
-      const icon = bookmarkButton.querySelector("i")
-      icon.classList.toggle("fa-regular")
-      icon.classList.toggle("fa-solid")
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
+    const bookmarkButton = slide.querySelector('.bookmark-btn')
+    bookmarkButton.addEventListener('click', () => {
+      const icon = bookmarkButton.querySelector('i')
+      icon.classList.toggle('fa-regular')
+      icon.classList.toggle('fa-solid')
+      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
 
       saveToLocalStorage(movie)
     })
@@ -531,7 +531,7 @@ async function loadBottomBanner() {
 }
 
 function autoSlide() {
-  const slides = document.querySelectorAll(".slide")
+  const slides = document.querySelectorAll('.slide')
   let index = 0
 
   setInterval(() => {
@@ -545,25 +545,25 @@ function autoSlide() {
 // Load the bottom banner on page load
 loadBottomBanner()
 
-const searchBtn = document.getElementById("search-btn")
-const searchBar = document.getElementById("search-bar")
+const searchBtn = document.getElementById('search-btn')
+const searchBar = document.getElementById('search-bar')
 
 searchBtn.addEventListener("click", () => {
-  searchBar.classList.toggle("active")
+  searchBar.classList.toggle('active')
 })
 
-const searchResults = document.getElementById("search-results")
+const searchResults = document.getElementById('search-results')
 
 // Handle search and fetch results
-searchBar.addEventListener("keypress", async (e) => {
-  if (e.key === "Enter") {
+searchBar.addEventListener('keypress', async (e) => {
+  if (e.key === 'Enter') {
     const query = searchBar.value.trim().toLowerCase()
     if (query) {
       await fetchSearchResults(query)
-      searchResults.style.display = "block" // Show search results
-      searchResults.style.overflowY = "scroll"
+      searchResults.style.display = 'block' // Show search results
+      searchResults.style.overflowY = 'scroll'
     } else {
-      searchResults.style.display = "none" // Hide search results when no query is provided
+      searchResults.style.display = 'none' // Hide search results when no query is provided
     }
   }
 })
@@ -577,53 +577,53 @@ async function fetchSearchResults(query) {
     const data = await response.json()
     displaySearchResults(data.results)
   } catch (error) {
-    console.error("Error fetching search results:", error)
+    console.error('Error fetching search results:', error)
   }
 }
 
 // Display results in the overlay
 function displaySearchResults(results) {
-  searchResults.innerHTML = "" // Clear previous results
+  searchResults.innerHTML = '' // Clear previous results
   if (results.length === 0) {
-    searchResults.innerHTML = "<p>No results found.</p>"
+    searchResults.innerHTML = '<p>No results found.</p>'
     return
   }
 
   function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [] // Retrieve existing watchlist or create empty array
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
     const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
     if (!movieExists) {
       watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem("watchlist", JSON.stringify(watchlist)) // Save updated list
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
     }
   }
 
   results.forEach((movie) => {
-    const movieEl = document.createElement("div")
-    movieEl.classList.add("movie-result")
+    const movieEl = document.createElement('div')
+    movieEl.classList.add('movie-result')
     movieEl.innerHTML = `
       <img src="${
         movie.poster_path
           ? IMG_PATH + movie.poster_path
-          : "https://via.placeholder.com/100"
+          : 'https://via.placeholder.com/100'
       }" 
            alt="${movie.title}">
       <div>
         <h3>${movie.title}</h3>
         <p>⭐ ${movie.vote_average.toFixed(1)} | Release Date: ${
-      movie.release_date || "N/A"
+      movie.release_date || 'N/A'
     }</p>
         <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button>
       </div>
     `
 
-    const bookmarkButton = movieEl.querySelector(".bookmark-btn")
-    bookmarkButton.addEventListener("click", () => {
-      const icon = bookmarkButton.querySelector("i")
-      icon.classList.toggle("fa-regular")
-      icon.classList.toggle("fa-solid")
-      icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""
+    const bookmarkButton = movieEl.querySelector('.bookmark-btn')
+    bookmarkButton.addEventListener('click', () => {
+      const icon = bookmarkButton.querySelector('i')
+      icon.classList.toggle('fa-regular')
+      icon.classList.toggle('fa-solid')
+      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
 
       saveToLocalStorage(movie)
     })
@@ -633,17 +633,17 @@ function displaySearchResults(results) {
 }
 
 // Close the overlay when clicking outside
-document.addEventListener("click", (e) => {
+document.addEventListener('click', (e) => {
   if (!searchResults.contains(e.target) && !searchBar.contains(e.target)) {
-    searchResults.style.display = "none"
+    searchResults.style.display = 'none'
   }
 })
 
 function init() {
   loadHeroBanner();
-  loadCarousel("just-released", "/movie/upcoming")
-  loadCarouselWide("watchlist", "/movie/top_rated")
-  loadCarouselWide("mostLiked", "/movie/popular")
+  loadCarousel('just-released', '/movie/upcoming')
+  loadCarouselWide('watchlist', '/movie/top_rated')
+  loadCarouselWide('mostLiked', '/movie/popular')
 }
 
 init()
