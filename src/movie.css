@@ -1,6 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+  line-height: 1.5;
+}
+
+a {
+  font-weight: 500;
+  color: #fffffff5;
+  text-decoration: inherit;
+}
+
+input[type="text"] {
+  display: contents;
+  border-radius: 20px;
+  border: 1px solid #00925d;
+  background-color: white;
+  padding: 0.4rem;
+  margin-left: 1rem;
+}
+
+a:hover {
+  color: #00925d;
+}
+
+a[type="active"] {
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+#navabar {
+  background-color: #1a1a1a;
+  padding: 39px 75px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+}
+
+#menu {
+  display: flex;
+  gap: 1em;
+  cursor: pointer;
+}
+
+#buttons {
+  display: flex;
+  gap: 0;
+  cursor: pointer;
+}
+
+#buttons :hover {
+  color: #00925d;
+}
+
+#logo {
+  cursor: pointer;
+}
+
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: #fff;
+}
+
 .hero-banner {
+  display: grid;
   width: 100%;
+  height: 90vh;
   position: relative;
-  color: white;
-  text-align: center;
+  color: #ebe9e9;
+  align-items: center;
+  font-weight: 900;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+    
+  }
+}
+
+.movie-content {
+  max-width: 500px;
+  margin-left: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 5rem;
+  position: absolute;
+  z-index: 5;
+}
+
+.bars {
+  display: none;
+}
+
+.description {
+  margin: 3rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  font-weight: bolder;
+}
+
+@media (max-width: 900px) {
+  #header {
+    padding: 5px;
+    font-size: 1rem;
+  }
+
+  #symbol {
+    display: block;
+  }
+
+  #search-bar.active {
+    display: inline-block;
+    opacity: 1;
+    width: 120px;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+
+  #menu {
+    display: none;
+  }
+
+  #logo {
+    display: none;
+    gap: 0.4rem;
+  }
+
+  .bars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #hero-banner {
+    align-items: normal;
+    h1 {
+      font-size: 2rem;
+    } 
+    p {
+      font-size: 12px;
+    }
+  }
+
+  #playOne,
+  #playTwo,
+  #playThree {
+    padding: 0.5rem;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-weight: 300;
+    justify-content: center;
+  }
 }

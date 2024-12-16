@@ -448,6 +448,7 @@ button:focus-visible {
 /* Carousel Section */
 .carousel {
   margin: 2rem 0;
+  position: relative;
 }
 
 .carousel h2 {
@@ -870,6 +871,16 @@ button:focus-visible {
   display: none;
 }
 
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px; /* Width of the overlay */
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+  pointer-events: none; 
+  z-index: 5;
+} 
 /* Media Queries */
 
 @media (max-width: 900px) {

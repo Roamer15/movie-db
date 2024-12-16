@@ -62,6 +62,7 @@ document.querySelector('#app').innerHTML = `
     </div>
     <button class="scroll-btn next-btn"><i class="fas fa-chevron-right"></i></button>
   </div>
+   <div class ="overlay"></div>
 </section>
 
   <!-- Other Sections -->
@@ -74,6 +75,7 @@ document.querySelector('#app').innerHTML = `
       <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
       <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
     </div>
+     <div class ="overlay"></div>
   </section>
 
    <section id="watchlist" class="carousel">
@@ -178,7 +180,7 @@ async function loadHeroBanner () {
     if (index === 0) slide.classList.add('active') // Set the first slide as active
 
     slide.innerHTML = `
-      <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH}${movie.backdrop_path})">
+      <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
       <div class="hero-details">
         <h1>${movie.title}</h1>
         <p>${movie.overview}</p>
@@ -201,10 +203,20 @@ async function loadHeroBanner () {
 
       // Save movie to localStorage
       saveToLocalStorage(movie)
-    });
+    })
+
+    const movieImage = slide.querySelector('img') // Select the image element
+    movieImage.addEventListener('click', () => {
+    // Save movie details to localStorage
+    localStorage.setItem('selectedMovie', JSON.stringify(movie))
+  
+    // Navigate to the second page
+    window.location.href = 'src/preview.html'
+    })
+
 
     slideshow.appendChild(slide)
-  });
+  })
 
   setupHeroNavigation()
 }
@@ -246,9 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
-  const BASE_URL = 'https://api.themoviedb.org/3'
-  const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
+
   const popularContainer = document.querySelector('.popular-items')
 
   // Fetch data for "Popular This Week"
@@ -283,7 +293,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       movieCard.innerHTML = `
       <div class="rank">${index + 1}</div>
-      <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH + movie.poster_path})">
+      <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
       <div class="movie-details">
         <h3>${movie.title}</h3>
         <p>${movie.genre_ids.slice(0, 2).join(" • ")}</p>
@@ -306,6 +316,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Save movie to localStorage
         saveToLocalStorage(movie)
       })
+
+      const movieImage = movieCard.querySelector('img') // Select the image element
+    movieImage.addEventListener('click', () => {
+    // Save movie details to localStorage
+    localStorage.setItem('selectedMovie', JSON.stringify(movie))
+  
+    // Navigate to the second page
+    window.location.href = 'src/preview.html'
+    })
+
 
       popularContainer.appendChild(movieCard)
     })
@@ -363,7 +383,7 @@ async function loadCarousel(sectionId, endpoint) {
       movieEl.classList.add('movie')
       movieEl.innerHTML = `
           <div class="movie-image">
-            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH}${movie.poster_path})">
+            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
             <div class="movie-overlay">
               <h3>${movie.title}</h3>
               <span>⭐ ${movie.vote_average.toFixed(1)}</span>
@@ -383,6 +403,16 @@ async function loadCarousel(sectionId, endpoint) {
 
         saveToLocalStorage(movie)
       })
+
+      const movieImage = movieEl.querySelector('img') // Select the image element
+      movieImage.addEventListener('click', () => {
+    // Save movie details to localStorage
+      localStorage.setItem('selectedMovie', JSON.stringify(movie))
+  
+    // Navigate to the second page
+      window.location.href = 'src/preview.html'
+    })
+
 
       carouselContainer.appendChild(movieEl)
     })
@@ -418,7 +448,7 @@ async function loadCarouselWide(sectionId, endpoint) {
     movieEl.classList.add('movie-wide')
     movieEl.innerHTML = `
         <div class="movie-img">
-          <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}" onclick="reDirect(${IMG_PATH}${movie.poster_path})">
+          <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
           <div class="movie-overlay-wide">
             <h3>${movie.title}</h3>
             <span>⭐ ${movie.vote_average.toFixed(
@@ -437,6 +467,17 @@ async function loadCarouselWide(sectionId, endpoint) {
 
       saveToLocalStorage(movie)
     })
+
+    const movieImage = movieEl.querySelector('img') // Select the image element
+    movieImage.addEventListener('click', () => {
+    // Save movie details to localStorage
+    localStorage.setItem('selectedMovie', JSON.stringify(movie))
+  
+    // Navigate to the second page
+    window.location.href = 'src/preview.html'
+    })
+
+
 
     carouselContainer.appendChild(movieEl)
   })
@@ -485,7 +526,7 @@ async function loadBottomBanner() {
     slide.classList.add('slide')
     slide.style.backgroundImage = `url(${IMG_PATH}${movie.backdrop_path})` // Use backdrop image
     slide.innerHTML = `
-                        <div class="slide-caption" onclick="reDirect(${IMG_PATH}${movie.backdrop_path})">${movie.title}</div>
+                        <div class="slide-caption" onclick="window.location.href = 'src/preview.html'">${movie.title}</div>
                            <div class="hero-bottom-details">
                            <div id="playBtnDown">
                             <button id="playOneDown"><i class="fa-solid fa-circle-play"></i> Play Now</button>                            
@@ -588,11 +629,7 @@ function displaySearchResults(results) {
           ? IMG_PATH + movie.poster_path
           : 'https://via.placeholder.com/100'
       }" 
-           alt="${movie.title}" onclick="reDirect(${
-            movie.poster_path
-              ? IMG_PATH + movie.poster_path
-              : 'https://via.placeholder.com/100'
-          })">
+           alt="${movie.title}" onclick="previewPage()">
       <div>
         <h3>${movie.title}</h3>
         <p>⭐ ${movie.vote_average.toFixed(1)} | Release Date: ${
@@ -611,6 +648,16 @@ function displaySearchResults(results) {
 
       saveToLocalStorage(movie)
     })
+
+    const movieImage = movieEl.querySelector('img') // Select the image element
+    movieImage.addEventListener('click', () => {
+    // Save movie details to localStorage
+    localStorage.setItem('selectedMovie', JSON.stringify(movie))
+  
+    // Navigate to the second page
+    window.location.href = 'src/preview.html'
+    })
+
 
     searchResults.appendChild(movieEl)
   })
@@ -632,11 +679,11 @@ function init() {
 
 init()
 
-
-  function reDirect(image) {
-    window.location.href = 'preview.html'
-    window.location.href.style.backgroundImage = image
-  }
-
-
-reDirect()
+ function storeDataAndNavigate() {
+  // Save data in localStorage
+  localStorage.setItem('username', 'JohnDoe');
+  localStorage.setItem('theme', 'dark');
+  
+  // Navigate to Page 2
+  window.location.href = 'src/preview.html';
+}
