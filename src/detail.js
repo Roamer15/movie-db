@@ -42,9 +42,52 @@ document.querySelector('#detail').innerHTML = `
       <p id="movie-overview">Movie overview...</p>
   </section>
 
+  <section class="similarMovies">
+    <h3>Similar Movies for you</h3>
+   <div class="carousel-wrapper">
+      <div class="carousel-container" id="watchlist-carousel">
+        <!-- Movies dynamically added -->
+      </div>
+      <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class ="overlay"></div>
+  </section>
+
+   <section class="footer">
+        <div class="footerOne">
+          <div class="contact">
+            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, quo! Molestiae cumque sunt asperiores.</h3>
+          </div>
+          <div class="terms">
+            <ul>
+              <li>Privacy policy</li>
+              <li>Terms of service</li>
+              <li>Language</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footerTwo">
+          <div class="newsletter">
+            <p>Home / Discover / Influence / Release</p>
+          </div>
+          <div class="social-media">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+    </section>
+
 `
 // Retrieve movie details
 const movie = JSON.parse(localStorage.getItem('selectedMovie'))
+
+const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
+const BASE_URL = 'https://api.themoviedb.org/3'
+const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
 if (movie) {
   // Populate your HTML elements with movie data
@@ -78,3 +121,50 @@ function saveToLocalStorage(movie) {
      // Save movie to localStorage
      saveToLocalStorage(movie)
    })
+
+
+   function setupCarouselNavigation(sectionId) {
+    const carousel = document.querySelector(`#${sectionId} .carousel-container`)
+    const prevBtn = document.querySelector(`#${sectionId} .carousel-button.prev`)
+    const nextBtn = document.querySelector(`#${sectionId} .carousel-button.next`)
+  
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -300, behavior: 'smooth' })
+    })
+  
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: 300, behavior: 'smooth' })
+    })
+  }
+
+  async function loadCarouselWide(sectionId, endpoint) {
+    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`)
+    const data = await response.json()
+    const movies = data.results
+  
+    const carouselContainer = document.querySelector(
+      `#${sectionId} .carousel-container`
+    )
+  
+    movies.forEach((movie) => {
+      const movieEl = document.createElement('div')
+      movieEl.classList.add('movie-wide')
+      movieEl.innerHTML = `
+          <div class="movie-img">
+            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+            <div class="movie-overlay-wide">
+              <h3>${movie.title}</h3>
+              <span>⭐ ${movie.vote_average.toFixed(
+                1
+              )}  <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button></span>
+            </div>
+          </div>
+        `
+  
+      carouselContainer.appendChild(movieEl)
+    })
+  
+    setupCarouselNavigation(sectionId)
+  }
+
+  loadCarouselWide('similarMovies','/movie/popular')

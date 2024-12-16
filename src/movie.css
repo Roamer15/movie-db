@@ -122,7 +122,7 @@ button {
   font-weight: bolder;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   #header {
     padding: 5px;
     font-size: 1rem;
