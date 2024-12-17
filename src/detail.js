@@ -1,7 +1,7 @@
 import "./movie.css"
-import "./style.css"
+//import "./style.css"
 
-document.querySelector('#detail').innerHTML = `
+document.querySelector("#detail").innerHTML = `
      <div id="navabar">
           <div id="logo">
             <img src="../public/images/Logo.png" alt="logo" id="symbol">
@@ -29,6 +29,7 @@ document.querySelector('#detail').innerHTML = `
  <section id="hero-banner" class="hero-banner">
      <div class="movie-content">
       <h1 id="movie-title">Movie Title</h1>
+      <span id="greyText"></span>
       <div id="playBtn">
           <button id="playOne"><i class="fa-solid fa-circle-play"></i> Play Now</button>
           <button id="playThree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
@@ -42,7 +43,7 @@ document.querySelector('#detail').innerHTML = `
       <p id="movie-overview">Movie overview...</p>
   </section>
 
-  <section class="similarMovies">
+  <section id="similarMovies">
     <h3>Similar Movies for you</h3>
    <div class="carousel-wrapper">
       <div class="carousel-container" id="watchlist-carousel">
@@ -51,13 +52,12 @@ document.querySelector('#detail').innerHTML = `
       <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
       <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
     </div>
-    <div class ="overlay"></div>
   </section>
 
    <section class="footer">
         <div class="footerOne">
           <div class="contact">
-            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, quo! Molestiae cumque sunt asperiores.</h3>
+            <h3>Our platform it trusted by millions & features best updated movies all around the world.</h3>
           </div>
           <div class="terms">
             <ul>
@@ -81,90 +81,122 @@ document.querySelector('#detail').innerHTML = `
         </div>
     </section>
 
-`
+`;
 // Retrieve movie details
-const movie = JSON.parse(localStorage.getItem('selectedMovie'))
+const movie = JSON.parse(localStorage.getItem("selectedMovie"));
+console.log(movie);
 
-const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
-const BASE_URL = 'https://api.themoviedb.org/3'
-const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
+const API_KEY = "de8d95a8fd855c524e4704e6647ae343";
+const BASE_URL = "https://api.themoviedb.org/3";
+const IMG_PATH = "https://image.tmdb.org/t/p/w500";
 
 if (movie) {
   // Populate your HTML elements with movie data
-  const movieSection = document.getElementById('hero-banner')
-  movieSection.style.backgroundImage = `url('https://image.tmdb.org/t/p/w1280${movie.backdrop_path || movie.poster_path})')`
-  document.getElementById('movie-title').textContent = movie.title;
-  document.getElementById('movie-overview').textContent = movie.overview;
+  const movieSection = document.getElementById("hero-banner");
+  movieSection.style.backgroundImage = `url('https://image.tmdb.org/t/p/w1280${
+    movie.backdrop_path || movie.poster_path
+  })')`;
+  document.getElementById("movie-title").textContent = movie.title;
+  document.getElementById("movie-overview").textContent = movie.overview;
+  document.getElementById("greyText").textContent = `Date: ${movie.release_date} | Popularity score:${movie.popularity}`;
 } else {
-  console.error('No movie data found in localStorage.');
+  console.error("No movie data found in localStorage.");
 }
 
 function saveToLocalStorage(movie) {
-  let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-  const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
+  let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []; // Retrieve existing watchlist or create empty array
+  const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
 
   if (!movieExists) {
     watchlist.push(movie); // Add movie to watchlist
-    localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
+    localStorage.setItem("watchlist", JSON.stringify(watchlist)); // Save updated list
   }
 }
 
-   // Add event listener to bookmark button
-   const bookmarkButton = playBtn.querySelector('.bookmark-btn')
-   bookmarkButton.addEventListener('click', () => {
-     // Toggle bookmark icon color
-     const icon = bookmarkButton.querySelector('i')
-     icon.classList.toggle('fa-regular')
-     icon.classList.toggle('fa-solid')
-     icon.style.color = icon.classList.contains("fa-solid") ? 'green' : '' // Green when solid
+// Add event listener to bookmark button
+const bookmarkButton = playBtn.querySelector(".bookmark-btn");
 
-     // Save movie to localStorage
-     saveToLocalStorage(movie)
-   })
+bookmarkButton.addEventListener("click", () => {
+  // Toggle bookmark icon color
+  const icon = bookmarkButton.querySelector("i");
+  icon.classList.toggle("fa-regular");
+  icon.classList.toggle("fa-solid");
+  icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""; // Green when solid
 
+  // Save movie to localStorage
+  saveToLocalStorage(movie);
+});
 
-   function setupCarouselNavigation(sectionId) {
-    const carousel = document.querySelector(`#${sectionId} .carousel-container`)
-    const prevBtn = document.querySelector(`#${sectionId} .carousel-button.prev`)
-    const nextBtn = document.querySelector(`#${sectionId} .carousel-button.next`)
-  
-    prevBtn.addEventListener('click', () => {
-      carousel.scrollBy({ left: -300, behavior: 'smooth' })
-    })
-  
-    nextBtn.addEventListener('click', () => {
-      carousel.scrollBy({ left: 300, behavior: 'smooth' })
-    })
+async function sameClassMovies(movieId) {
+  // Get movie ID from localStorage instead of URL
+  const popularContainer = document.querySelector(".carousel-container");
+  console.log(movieId);
+  if (!movieId) {
+    console.error("Error: Movie ID not found.");
+    return;
   }
 
-  async function loadCarouselWide(sectionId, endpoint) {
-    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`)
-    const data = await response.json()
-    const movies = data.results
-  
-    const carouselContainer = document.querySelector(
-      `#${sectionId} .carousel-container`
-    )
-  
-    movies.forEach((movie) => {
-      const movieEl = document.createElement('div')
-      movieEl.classList.add('movie-wide')
+  try {
+    const response = await fetch(
+      `${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`
+    );
+    if (!response.ok) {
+      console.error(`Error fetching similar movies: ${response.status}`);
+      return;
+    }
+
+    const data = await response.json();
+    const similarMoviesContainer =
+      document.getElementById("watchlist-carousel");
+    similarMoviesContainer.innerHTML = "";
+
+    data.results.forEach((movie) => {
+      const movieEl = document.createElement("div");
+      movieEl.classList.add("movie-similar");
       movieEl.innerHTML = `
-          <div class="movie-img">
-            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
-            <div class="movie-overlay-wide">
-              <h3>${movie.title}</h3>
-              <span>⭐ ${movie.vote_average.toFixed(
-                1
-              )}  <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button></span>
+           <div class="movie-img">
+              <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+            </div>
+            <div class="movie-details">
+               <h3 class="movie-title">${movie.title}</h3>
+           <div class="movie-rating">
+              ⭐ ${movie.vote_average.toFixed(1)}
+               <button class="bookmark-btn">
+                  <i class="fa-regular fa-bookmark"></i>
+                </button>
             </div>
           </div>
-        `
-  
-      carouselContainer.appendChild(movieEl)
-    })
-  
-    setupCarouselNavigation(sectionId)
+        `;
+      similarMoviesContainer.appendChild(movieEl);
+    });
+  } catch (error) {
+    console.error("Error fetching similar movies:", error.message);
   }
 
-  loadCarouselWide('similarMovies','/movie/popular')
+  const bookmarkButton = similarMovies.querySelector(".bookmark-btn");
+
+  bookmarkButton.addEventListener("click", () => {
+    // Toggle bookmark icon color
+    const icon = bookmarkButton.querySelector("i");
+    icon.classList.toggle("fa-regular");
+    icon.classList.toggle("fa-solid");
+    icon.style.color = icon.classList.contains("fa-solid") ? "green" : ""; // Green when solid
+
+    // Save movie to localStorage
+    saveToLocalStorage(movie);
+  });
+
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  prevBtn.addEventListener("click", () => {
+    popularContainer.scrollLeft -= 300;
+  });
+
+  nextBtn.addEventListener("click", () => {
+    popularContainer.scrollLeft += 300;
+  });
+}
+
+// Call the function
+sameClassMovies(movie.id);

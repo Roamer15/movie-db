@@ -678,12 +678,3 @@ function init() {
 }
 
 init()
-
- function storeDataAndNavigate() {
-  // Save data in localStorage
-  localStorage.setItem('username', 'JohnDoe');
-  localStorage.setItem('theme', 'dark');
-  
-  // Navigate to Page 2
-  window.location.href = 'src/preview.html';
-}

@@ -613,7 +613,8 @@ button:focus-visible {
 }
 
 .movie-wide img {
-  object-fit: unset;
+  object-fit: cover;
+  object-position: top;
   width: 290px;
   height: 210px;
   border-radius: 8px;

@@ -100,15 +100,54 @@ button {
   }
 }
 
+#playOne {
+  background-color: #00925d;
+  margin-right: 1rem;
+  padding: 1rem;
+}
+
+#playTwo {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  padding: 1rem;
+}
+
+#playThree {
+  background-color: #1a1a1a3f;
+  border: none;
+  backdrop-filter: blur(100px);
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
+.prev {
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+.next {
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
 .movie-content {
-  max-width: 500px;
   margin-left: 3rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 2rem;
-  margin-top: 5rem;
+  margin: 5rem 0 2rem 3rem;
   position: absolute;
   z-index: 5;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .bars {
@@ -121,6 +160,116 @@ button {
   line-height: 1.8;
   font-weight: bolder;
 }
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 26, 1),
+    rgba(26, 26, 26, 0)
+  ); /* Dark at bottom, fading to transparent */
+  pointer-events: none;
+}
+
+#greyText {
+  font-style: italic;
+  color: grey;
+}
+
+#watchlist-carousel {
+  display: flex;
+}
+
+#similarMovies {
+  position: relative;
+  margin-left: 3rem;
+  box-shadow: none;
+
+  h3 {
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.movie-img {
+  width: 500px;
+  border-radius: 20px;
+  padding: 5px;
+
+  img {
+    height: 400px;
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
+.movie-similar {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.footer {
+  border-top: 1px solid #f5efefd5;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  padding: 2rem;
+}
+
+.footerOne {
+  align-items: center;
+  color: #ffffff;
+}
+
+.contact {
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: bolder;
+  width: 70%;
+  font-size: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.terms {
+  margin: 1rem;
+  font-size: 0.7rem;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+  }
+}
+
+.newsletter {
+  font-size: 1.5rem;
+}
+
+.footerTwo {
+  padding-left: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.social-media {
+  font-size: 2.2rem;
+  justify-content: space-around;
+  padding-top: 1rem;
+}
+
 
 @media (max-width: 768px) {
   #header {
