@@ -113,17 +113,21 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="genres">
-        <div id = "one" class="genreBox">Fantasy</div>
-        <div id = "two" class="genreBox">Adventure</div>
-        <div id = "three" class="genreBox">Science Fiction</div>
-        <div id = "four" class="genreBox">Action</div>
+    <section id="tags">
+        <div class="tag">Fantasy</div>
+        <div class="tag">Adventure</div>
+        <div class="tag">Science Fiction</div>
+        <div class="tag">Action</div>
+     </section>
+
+     <section class="genre-related">
+     <!-- Genre related movies  will be displayed here-->
      </section>
     
       <section class="footer">
         <div class="footerOne">
           <div class="contact">
-            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, quo! Molestiae cumque sunt asperiores.</h3>
+            <h3>Our platform it trusted by millions & features best updated movies all around the world.</h3>
           </div>
           <div class="terms">
             <ul>
@@ -152,6 +156,180 @@ document.querySelector('#app').innerHTML = `
 const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
 const BASE_URL = 'https://api.themoviedb.org/3'
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
+
+const API_GENRE_URL = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`
+
+const genres = [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ]
+
+let selectedGenre = []
+// Genre section
+const tagsEl = document.getElementById('tags')
+
+function genreDisplay() {
+  tagsEl.innerHTML = '';
+  genres.forEach(genre => {
+    const t = document.createElement('div');
+    t.classList.add('tag')
+    t.id = genre.id
+    t.innerText = genre.name
+
+    t.addEventListener('click', () => {
+      const displaySection = document.querySelector('.genre-related')
+      displaySection.style.display = 'flex'
+      if (selectedGenre.includes(genre.id)) {
+        selectedGenre = selectedGenre.filter(id => id !== genre.id) // Remove genre
+      } else {
+        selectedGenre.push(genre.id) // Add genre
+      }
+      console.log(selectedGenre)
+
+      const DISCOVER_URL = `${BASE_URL}/discover/movie?api_key=${API_KEY}`
+      getMovies(DISCOVER_URL + '&with_genres=' + encodeURI(selectedGenre.join(',')))
+    })
+
+    tagsEl.append(t)
+  })
+}
+
+
+genreDisplay()
+
+getMovies(API_GENRE_URL)
+
+function getMovies(url) {
+  fetch(url)
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+      return res.json()
+    })
+    .then(data => {
+      console.log(data.results) // Debugging line
+      showMovies(data.results)
+    })
+    .catch(err => console.error('Error fetching movies:', err.message))
+}
+
+function showMovies(data) {
+  const genreContainer = document.querySelector('.genre-related')
+
+  function saveToLocalStorage(movie) {
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
+    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
+
+    if (!movieExists) {
+      watchlist.push(movie) // Add movie to watchlist
+      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
+    }
+  }
+
+  genreContainer.innerHTML = ``
+  data.forEach(movie => {
+    const movieEl = document.createElement('div')
+    movieEl.classList.add('movie')
+    movieEl.innerHTML = `
+      <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+      <h3>${movie.title}</h3>
+       <span>⭐ ${movie.vote_average.toFixed(1)} <button class="bookmark-btn"><i class="fa-regular fa-bookmark"></i></button></span>
+  `
+  const bookmarkButton = movieEl.querySelector('.bookmark-btn')
+  bookmarkButton.addEventListener('click', () => {
+    const icon = bookmarkButton.querySelector('i');
+    icon.classList.toggle('fa-regular')
+    icon.classList.toggle('fa-solid')
+    icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
+
+    saveToLocalStorage(movie)
+  })
+
+  const movieImage = movieEl.querySelector('img') // Select the image element
+  movieImage.addEventListener('click', () => {
+// Save movie details to localStorage
+  localStorage.setItem('selectedMovie', JSON.stringify(movie))
+
+// Navigate to the second page
+  window.location.href = 'src/preview.html'
+})
+  
+  genreContainer.appendChild(movieEl)
+  })
+}
 
 // Fetch and populate hero banner
 async function loadHeroBanner () {
@@ -250,7 +428,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (button.classList.contains('prev')) {
         carousel.scrollLeft -= scrollAmount
-      } else if (button.classList.contains('next')) {
+      } 
+      else if (button.classList.contains('next')) {
         carousel.scrollLeft += scrollAmount
       }
     })
@@ -394,25 +573,25 @@ async function loadCarousel(sectionId, endpoint) {
           </div>
         `
 
-      const bookmarkButton = movieEl.querySelector('.bookmark-btn')
-      bookmarkButton.addEventListener('click', () => {
-        const icon = bookmarkButton.querySelector('i');
-        icon.classList.toggle('fa-regular')
-        icon.classList.toggle('fa-solid')
-        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
-
-        saveToLocalStorage(movie)
-      })
-
-      const movieImage = movieEl.querySelector('img') // Select the image element
-      movieImage.addEventListener('click', () => {
-    // Save movie details to localStorage
-      localStorage.setItem('selectedMovie', JSON.stringify(movie))
+        const bookmarkButton = movieEl.querySelector('.bookmark-btn')
+        bookmarkButton.addEventListener('click', () => {
+          const icon = bookmarkButton.querySelector('i');
+          icon.classList.toggle('fa-regular')
+          icon.classList.toggle('fa-solid')
+          icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
   
-    // Navigate to the second page
-      window.location.href = 'src/preview.html'
-    })
-
+          saveToLocalStorage(movie)
+        })
+  
+        const movieImage = movieEl.querySelector('img') // Select the image element
+        movieImage.addEventListener('click', () => {
+      // Save movie details to localStorage
+        localStorage.setItem('selectedMovie', JSON.stringify(movie))
+    
+      // Navigate to the second page
+        window.location.href = 'src/preview.html'
+      })
+  
 
       carouselContainer.appendChild(movieEl)
     })

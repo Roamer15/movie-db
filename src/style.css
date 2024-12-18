@@ -657,9 +657,8 @@ button:focus-visible {
 /* Bottom Banner Styles */
 .bottom-banner {
   width: 100%;
-  height: 400px; /* Adjust as needed */
+  height: 50ch; /* Adjust as needed */
   overflow: hidden;
-  position: relative;
   background-color: #1e1e1e;
 }
 
@@ -668,7 +667,6 @@ button:focus-visible {
   display: flex;
   width: 100%;
   height: 100%;
-  position: relative;
   overflow: hidden;
 }
 
@@ -714,36 +712,68 @@ button:focus-visible {
   padding: 1rem;
 }
 
-.genres {
+#tags {
   display: flex;
   margin: 3rem auto;
   text-align: center;
-  gap: 2rem;
-  justify-content: center;
+  gap: 1rem;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
 }
 
-.genreBox {
-  width: 200px;
-  height: 50px;
+/*Genres*/
+
+.tag {
   display: flex;
+  padding: 0.5rem;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
   margin: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+  border: 2px solid #ffffffb3;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
   box-shadow: 0.3s ease;
   background-color: hsla(0, 6%, 86%, 0.4);
   cursor: pointer;
+  min-width: 300px;
+  min-height: 60px;
 }
 
-.genreBox:hover {
+#tag::-webkit-scrollbar {
+  width: 20px;
+}
+
+.tag:hover {
+  border: 2px #00925d;
+  background-color: #03b876;
   transform: scale(1.05);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.genre-related {
+  display: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.genre-related .movie {
+  cursor: pointer;
+  min-height: 210px;
+  min-height: 300px;
+
+  img {
+    width: 290px;
+    height: 210px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -767,8 +797,12 @@ button:focus-visible {
 
 .contact {
   padding: 0 1rem;
-  margin-bottom: 1.5rem;
   font-weight: bolder;
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+  width: 70%;
+  font-size: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .terms {
