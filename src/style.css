@@ -743,8 +743,45 @@ button:focus-visible {
   min-height: 60px;
 }
 
-#tag::-webkit-scrollbar {
-  width: 20px;
+/*Favourites*/
+
+.favorites-container {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 60%;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  padding: 20px;
+  display: none;
+}
+
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+
+.favorites-container .movie-card {
+  width: 200px;
+  text-align: center;
+}
+
+
+.favorites-container .movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.favorites-container.hidden {
+  display: none;
 }
 
 .tag:hover {

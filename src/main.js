@@ -15,6 +15,7 @@ document.querySelector('#app').innerHTML = `
             <a href="#" class="menu-item">Discover</a>
             <a href="#" class="menu-item">Movie Release</a>
             <a href="#" class="menu-item">Forum</a>
+            <a href="#" class="menu-item" id="favourites-link">Favourites</a>
             <a href="#" class="menu-item">About</a>
           </div>
           <div id="buttons">
@@ -28,6 +29,10 @@ document.querySelector('#app').innerHTML = `
       <!-- Search Results Overlay -->
         <div id="search-results"></div>
 
+        <div class="favorites-container hidden" id="favorites-container">
+            <h2>My Favorite Movies</h2>
+            <div class="favorites-list" id="favorites-list"></div>
+        </div>
         
   <!-- Hero Banner -->
   <section class="hero-banner">
@@ -330,6 +335,57 @@ function showMovies(data) {
   genreContainer.appendChild(movieEl)
   })
 }
+
+//Favourites section
+
+/* const favoritesLink = document.getElementById('favourites-link')
+const favoritesContainer = document.getElementById('favorites-container')
+const favoritesList = document.getElementById('favorites-list')
+
+// Prevent anchor navigation and display favorites
+favoritesLink.addEventListener('click', (event) => {
+  event.preventDefault() // Prevent anchor tag default behavior
+  favoritesContainer.classList.toggle('hidden') // Toggle visibility
+  if (!favoritesContainer.classList.contains('hidden')) {
+    displayFavorites() // Display stored movies
+  }
+})
+
+// Retrieve favorites from localStorage
+function getFavoritesFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('watchlist')) || []
+}
+
+// Display favorite movies
+function displayFavorites() {
+  const favorites = getFavoritesFromLocalStorage()
+
+  favoritesList.innerHTML = '' // Clear previous content
+
+  if (favorites.length === 0) {
+    favoritesList.innerHTML = `<p>No favorite movies added yet!</p>`
+    return
+  }
+
+  favorites.forEach((movie) => {
+    const movieEl = document.createElement('div')
+    movieEl.classList.add('movie-card')
+    movieEl.innerHTML = `
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+      <h3>${movie.title}</h3>
+      <p>⭐ ${movie.vote_average.toFixed(1)}</p>
+    `
+    favoritesList.appendChild(movieEl)
+  })
+}
+
+// Close popup if clicked outside the container
+window.addEventListener('click', (event) => {
+  if (event.target === favoritesContainer) {
+    favoritesContainer.classList.add("hidden")
+  }
+}) */
+
 
 // Fetch and populate hero banner
 async function loadHeroBanner () {
