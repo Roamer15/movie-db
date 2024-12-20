@@ -397,6 +397,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
+function changeButtonColor (className, movie) {
+  // Find the bookmark button inside the specified className
+  const bookmarkButton = className.querySelector('.bookmark-btn')
+
+  // Check if the button exists
+  if (!bookmarkButton) {
+    console.error('Bookmark button not found within the provided element.')
+    return
+  }
+
+  // Add a click event listener to the bookmark button
+  bookmarkButton.addEventListener('click', () => {
+    console.log('Bookmark button clicked!') // Debugging
+
+    // Find the <i> element inside the button
+    const icon = bookmarkButton.querySelector('i')
+
+    // Ensure the <i> element exists
+    if (!icon) {
+      console.error('Icon inside the bookmark button is not found.')
+      return
+    }
+
+    console.log('Icon found:', icon) // Debugging
+
+    // Toggle bookmark icon classes and color
+    icon.classList.toggle('fa-regular')
+    icon.classList.toggle('fa-solid')
+    icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green if solid
+
+    console.log('Icon class updated:', icon.classList) // Debugging
+
+    // Save the movie to localStorage
+    saveToLocalStorage(movie)
+  })
+}
+
 // Fetch and populate hero banner
 async function loadHeroBanner () {
   const response = await fetch(
@@ -425,19 +462,7 @@ async function loadHeroBanner () {
       </div>
     `
 
-    // Add event listener to bookmark button
-    const bookmarkButton = slide.querySelector('.bookmark-btn')
-    bookmarkButton.addEventListener('click', () => {
-      // Toggle bookmark icon color
-      const icon = bookmarkButton.querySelector('i')
-      icon.classList.toggle('fa-regular')
-      icon.classList.toggle('fa-solid')
-      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green when solid
-
-      // Save movie to localStorage
-      saveToLocalStorage(movie)
-    })
-
+    changeButtonColor(slide, movie)
     redirectToDetailPage(slide, movie)
 
     slideshow.appendChild(slide)
@@ -519,18 +544,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     `
 
-      // Add event listener to bookmark button
-      const bookmarkButton = movieCard.querySelector('.bookmark-btn')
-      bookmarkButton.addEventListener('click', () => {
-        // Toggle bookmark icon color
-        const icon = bookmarkButton.querySelector('i')
-        icon.classList.toggle('fa-regular')
-        icon.classList.toggle('fa-solid')
-        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green when solid
-
-        // Save movie to localStorage
-        saveToLocalStorage(movie)
-      })
+      changeButtonColor(movieCard, movie)
 
       redirectToDetailPage(movieCard, movie)
 
@@ -593,15 +607,7 @@ async function loadCarousel (sectionId, endpoint) {
           </div>
         `
 
-      const bookmarkButton = movieEl.querySelector('.bookmark-btn')
-      bookmarkButton.addEventListener('click', () => {
-        const icon = bookmarkButton.querySelector('i')
-        icon.classList.toggle('fa-regular')
-        icon.classList.toggle('fa-solid')
-        icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
-
-        saveToLocalStorage(movie)
-      })
+      changeButtonColor(movieEl, movie)
 
       redirectToDetailPage(movieEl, movie)
 
@@ -639,15 +645,7 @@ async function loadCarouselWide (sectionId, endpoint) {
         </div>
       `
 
-    const bookmarkButton = movieEl.querySelector('.bookmark-btn')
-    bookmarkButton.addEventListener('click', () => {
-      const icon = bookmarkButton.querySelector('i')
-      icon.classList.toggle('fa-regular')
-      icon.classList.toggle('fa-solid')
-      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
-
-      saveToLocalStorage(movie)
-    })
+    changeButtonColor(movieEl, movie)
 
     redirectToDetailPage(movieEl, movie)
 
@@ -697,15 +695,7 @@ async function loadBottomBanner () {
                        </div>
     
                         `
-    const bookmarkButton = slide.querySelector('.bookmark-btn')
-    bookmarkButton.addEventListener('click', () => {
-      const icon = bookmarkButton.querySelector('i')
-      icon.classList.toggle('fa-regular')
-      icon.classList.toggle('fa-solid')
-      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
-
-      saveToLocalStorage(movie)
-    })
+    changeButtonColor(slide, movie)
 
     slideshowContainer.appendChild(slide)
   })
@@ -791,15 +781,7 @@ function displaySearchResults (results) {
       </div>
     `
 
-    const bookmarkButton = movieEl.querySelector('.bookmark-btn')
-    bookmarkButton.addEventListener('click', () => {
-      const icon = bookmarkButton.querySelector('i')
-      icon.classList.toggle('fa-regular')
-      icon.classList.toggle('fa-solid')
-      icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
-
-      saveToLocalStorage(movie)
-    })
+    changeButtonColor(movieEl, movie)
 
     redirectToDetailPage(movieEl, movie)
 

@@ -175,7 +175,7 @@ async function sameClassMovies (movieId) {
     console.error('Error fetching similar movies:', error.message)
   }
 
-  const bookmarkButton = similarMovies.querySelector('.bookmark-btn')
+  const bookmarkButton = movieEl.querySelector('.bookmark-btn')
 
   bookmarkButton.addEventListener('click', () => {
     // Toggle bookmark icon color
