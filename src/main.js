@@ -303,8 +303,6 @@ function saveToLocalStorage (movie) {
     watchlist.push(movie)
     localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
     console.log(`${movie.title} has been added to your favorites.`)
-    icon.classList.toggle('fa-solid')
-    icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
   } else {
     // Remove movie from watchlist
     watchlist = watchlist.filter((item) => item.id !== movie.id) // Create a new array without the removed movie
@@ -349,6 +347,7 @@ function showMovies (data) {
     })
 
     redirectToDetailPage(movieEl, movie)
+    changeButtonColor(movieEl, movie)
 
     genreContainer.appendChild(movieEl)
   })
@@ -398,38 +397,27 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function changeButtonColor (className, movie) {
-  // Find the bookmark button inside the specified className
   const bookmarkButton = className.querySelector('.bookmark-btn')
 
-  // Check if the button exists
   if (!bookmarkButton) {
     console.error('Bookmark button not found within the provided element.')
     return
   }
 
-  // Add a click event listener to the bookmark button
   bookmarkButton.addEventListener('click', () => {
-    console.log('Bookmark button clicked!') // Debugging
-
-    // Find the <i> element inside the button
     const icon = bookmarkButton.querySelector('i')
 
-    // Ensure the <i> element exists
     if (!icon) {
       console.error('Icon inside the bookmark button is not found.')
       return
     }
-
-    console.log('Icon found:', icon) // Debugging
 
     // Toggle bookmark icon classes and color
     icon.classList.toggle('fa-regular')
     icon.classList.toggle('fa-solid')
     icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green if solid
 
-    console.log('Icon class updated:', icon.classList) // Debugging
-
-    // Save the movie to localStorage
+    // Save or remove movie from localStorage
     saveToLocalStorage(movie)
   })
 }
