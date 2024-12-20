@@ -312,7 +312,7 @@ function saveToLocalStorage(movie) {
   }
 }
 
-function redirectToDetailPage (movieToRedirect) {
+function redirectToDetailPage (movieToRedirect, movie) {
   const movieImage = movieToRedirect.querySelector('img') // Select the image element
   movieImage.addEventListener('click', () => {
   // Save movie details to localStorage
@@ -345,7 +345,7 @@ function showMovies(data) {
     saveToLocalStorage(movie)
   })
 
-  redirectToDetailPage (movieEl)
+  redirectToDetailPage (movieEl, movie)
   
   genreContainer.appendChild(movieEl)
   })
@@ -435,7 +435,7 @@ async function loadHeroBanner () {
     })
 
   
-    redirectToDetailPage (slide)
+    redirectToDetailPage (slide, movie)
 
 
     slideshow.appendChild(slide)
@@ -531,7 +531,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       })
 
  
-      redirectToDetailPage (movieCard)
+      redirectToDetailPage (movieCard, movie)
 
 
       popularContainer.appendChild(movieCard)
@@ -602,7 +602,7 @@ async function loadCarousel(sectionId, endpoint) {
         })
   
 
-        redirectToDetailPage (movieEl)
+        redirectToDetailPage (movieEl, movie)
 
       carouselContainer.appendChild(movieEl)
     })
@@ -649,7 +649,7 @@ async function loadCarouselWide(sectionId, endpoint) {
     })
 
 
-    redirectToDetailPage (movieEl)
+    redirectToDetailPage (movieEl, movie)
 
     carouselContainer.appendChild(movieEl)
   })
@@ -801,8 +801,7 @@ function displaySearchResults(results) {
       saveToLocalStorage(movie)
     })
 
-    redirectToDetailPage (movieEl)
-
+    redirectToDetailPage (movieEl, movie)
 
     searchResults.appendChild(movieEl)
   })
