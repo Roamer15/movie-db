@@ -63,7 +63,6 @@ a[type="active"] {
   cursor: pointer;
 }
 
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -96,7 +95,6 @@ button {
 
   p {
     font-size: 1.3rem;
-    
   }
 }
 
@@ -220,7 +218,6 @@ button {
   flex-direction: column;
 }
 
-
 .footer {
   border-top: 1px solid #f5efefd5;
   display: grid;
@@ -239,7 +236,7 @@ button {
   font-weight: bolder;
   width: 70%;
   font-size: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .terms {
@@ -269,7 +266,6 @@ button {
   justify-content: space-around;
   padding-top: 1rem;
 }
-
 
 @media (max-width: 768px) {
   #header {
@@ -315,7 +311,8 @@ button {
     align-items: normal;
     h1 {
       font-size: 2rem;
-    } 
+    }
+
     p {
       font-size: 12px;
     }
