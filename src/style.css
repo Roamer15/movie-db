@@ -253,6 +253,7 @@ button:focus-visible {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  overflow: hidden;
 
   img {
     height: 7rem;
@@ -284,6 +285,10 @@ button:focus-visible {
 
 .nav-btn.next {
   right: 10px;
+}
+
+.nav-btn .prev {
+  left: 10px;
 }
 
 .nav-btn:hover {

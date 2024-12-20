@@ -3,11 +3,11 @@ import './style.css'
 document.querySelector('#app').innerHTML = `
       <div id="header">
           <div id="logo">
-            <img src="./public/images/Logo.png" alt="logo" id="symbol">
-            <img src="./public/images/SaintStream.png" alt="logo">
+            <img src="/images/Logo.png" alt="logo" id="symbol">
+            <img src="/images/SaintStream.png" alt="logo">
           </div>
            <div class="bars">
-            <img src="./public/images/Logo.png" alt="logo" id="symbol">
+            <img src="/images/Logo.png" alt="logo" id="symbol">
             <i class="fa-solid fa-bars"></i>
             </div>
           <div id="menu">
@@ -48,14 +48,16 @@ document.querySelector('#app').innerHTML = `
   </section>
 
   <section id="movie-partners">
-      <img src="./public/images/Disney1.png" alt="disney">
-      <img src="./public/images/Netflix.png" alt="netflix">
-      <img src="./public/images/hbomax.png" alt="hbomax">
-      <img src="./public/images/pixar.png" alt="pixar">
-      <img src="./public/images/marvel.png" alt="marvel">
-      <img src="./public/images/starwars.webp" alt="starwars">
-      <img src="./public/images/geographic.png" alt="geographic">
-    <button class="nav-btn next" data-carousel="recent">&#8250;</button>
+  <button class="nav-btn prev" id="recent">&#8250;</button>
+      <img src="/images/Disney1.png" alt="disney">
+      <img src="/images/Netflix.png" alt="netflix">
+      <img src="/images/hbomax.png" alt="hbomax">
+      <img src="/images/pixar.png" alt="pixar">
+      <img src="/images/marvel.png" alt="marvel">
+      <img src="/images/starwars.webp" alt="starwars">
+      <img src="/images/geographic.png" alt="geographic">
+      <img src ="/images/youtube.png" alt ="youtube">
+    <button class="nav-btn next" id="recent">&#8250;</button>
   </section>
 
   <section class="popular-section">
@@ -290,21 +292,26 @@ function getMovies(url) {
     })
     .catch(err => console.error('Error fetching movies:', err.message))
 }
-
+// Favourite Movies function
 function saveToLocalStorage(movie) {
-  let watchlist = JSON.parse(localStorage.getItem('favourite')) || [] // Retrieve existing watchlist or create empty array
-  const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
+  let watchlist = JSON.parse(localStorage.getItem('favourite')) || []; // Retrieve existing watchlist or create an empty array
+  const movieExists = watchlist.some((item) => item.id === movie.id); // Check if the movie already exists
 
   if (!movieExists) {
-    watchlist.push(movie) // Add movie to watchlist
-    localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
-  }
-
-  else {
-    watchlist.pop(movie) // Remove movie from watchlist
-    /* localStorage.removeItem('favourite') // Remove */
+    // Add movie to watchlist
+    watchlist.push(movie);
+    localStorage.setItem('favourite', JSON.stringify(watchlist)); // Save updated list
+    console.log(`${movie.title} has been added to your favorites.`);
+    icon.classList.toggle('fa-solid')
+    icon.style.color = icon.classList.contains('fa-solid') ? 'green' : ''
+  } else {
+    // Remove movie from watchlist
+    watchlist = watchlist.filter((item) => item.id !== movie.id); // Create a new array without the removed movie
+    localStorage.setItem('favourite', JSON.stringify(watchlist)); // Save updated list
+    console.log(`${movie.title} has been removed from your favorites.`);
   }
 }
+
 
 function showMovies(data) {
   const genreContainer = document.querySelector('.genre-related')
@@ -340,77 +347,6 @@ function showMovies(data) {
   genreContainer.appendChild(movieEl)
   })
 }
-
-//Favourites section
-
-/* const favoritesLink = document.getElementById('favourites-link')
-const favoritesContainer = document.getElementById('favorites-container')
-const favoritesList = document.getElementById('favorites-list')
-
-// Prevent anchor navigation and display favorites
-favoritesLink.addEventListener('click', (event) => {
-  event.preventDefault() // Prevent anchor tag default behavior
-  favoritesContainer.classList.toggle('hidden') // Toggle visibility
-  if (!favoritesContainer.classList.contains('hidden')) {
-    displayFavorites() // Display stored movies
-  }
-})
-
-// Retrieve favorites from localStorage
-function getFavoritesFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('watchlist')) || []
-}
-
-// Display favorite movies
-function displayFavorites() {
-  const favorites = getFavoritesFromLocalStorage()
-
-  favoritesList.innerHTML = '' // Clear previous content
-
-  if (favorites.length === 0) {
-    favoritesList.innerHTML = `<p>No favorite movies added yet!</p>`
-    return
-  }
-
-  favorites.forEach((movie) => {
-    const movieEl = document.createElement('div')
-    movieEl.classList.add('movie-card')
-    movieEl.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-      <p>⭐ ${movie.vote_average.toFixed(1)}</p>
-    `
-    favoritesList.appendChild(movieEl)
-  })
-}
-
-// Close popup if clicked outside the container
-window.addEventListener('click', (event) => {
-  if (event.target === favoritesContainer) {
-    favoritesContainer.classList.add("hidden")
-  }
-}) */
-/* const toggleAnchor = document.getElementById('favourites-link')
-const favoritesContainer = document.getElementById('favorites-container')
-
-toggleAnchor.addEventListener('click', () => {
-  favoritesContainer.classList.toggle('active')
-  displayFavorites()
-})
-
-const favoritesList = document.getElementById('favorites-list')
-const favMovie = JSON.parse(localStorage.getItem('watchlist'))
-
-function displayFavorites(){
-  const movieFavCard = document.createElement('div')
-  movieFavCard.classList.add('movie-card')
-  movieFavCard.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500${favMovie[0].poster_path}" alt="${favMovie[0].title}">
-    <h3>${favMovie[0].title}</h3>
-    <p>��� ${favMovie[0].vote_average.toFixed(1)}</p>
-  `
-  favoritesList.appendChild(movieFavCard)
-} */
 
   document.addEventListener('DOMContentLoaded', () => {
     const toggleAnchor = document.getElementById('favourites-link') // anchor tag
@@ -501,7 +437,7 @@ async function loadHeroBanner () {
     localStorage.setItem('selectedMovie', JSON.stringify(movie))
   
     // Navigate to the second page
-    window.location.href = 'src/preview.html'
+    window.location.href = '/src/preview.html'
     })
 
 
@@ -534,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      const carouselId = button.getAttribute('data-carousel')
+      const carouselId = button.getAttribute('data-carousel-id')
       const carousel = document.getElementById(carouselId)
       const scrollAmount = carousel.offsetWidth; // Scroll by one carousel width
 
