@@ -225,6 +225,34 @@ button:focus-visible {
   cursor: pointer;
 }
 
+.favorites-container .movie-card img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.genre-related {
+  display: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.genre-related .movie {
+  cursor: pointer;
+  min-height: 210px;
+  min-height: 300px;
+
+  img {
+    width: 290px;
+    height: 210px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+  }
+}
+
 #movie-partners {
   padding: 1rem 0.7rem;
   margin-top: 3rem;
@@ -754,34 +782,6 @@ button:focus-visible {
   display: block;
   margin: 10px;
   text-align: left;
-}
-
-.favorites-container .movie-card img {
-  width: 200px;
-  height: auto;
-  border-radius: 8px;
-}
-
-.genre-related {
-  display: none;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.genre-related .movie {
-  cursor: pointer;
-  min-height: 210px;
-  min-height: 300px;
-
-  img {
-    width: 290px;
-    height: 210px;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 10px;
-  }
 }
 
 @media (max-width: 768px) {
