@@ -101,6 +101,7 @@ if (movie) {
   document.getElementById(
     'greytext'
   ).textContent = `Date: ${movie.release_date} | Popularity score:${movie.popularity}`
+  changeButtonColor(movieSection, movie)
 } else {
   console.error('No movie data found in localStorage.')
 }
@@ -114,20 +115,6 @@ function saveToLocalStorage (movie) {
     localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
   }
 }
-
-// Add event listener to bookmark button
-const bookmarkButton = playBtn.querySelector('.bookmark-btn')
-
-bookmarkButton.addEventListener('click', () => {
-  // Toggle bookmark icon color
-  const icon = bookmarkButton.querySelector('i')
-  icon.classList.toggle('fa-regular')
-  icon.classList.toggle('fa-solid')
-  icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green when solid
-
-  // Save movie to localStorage
-  saveToLocalStorage(movie)
-})
 
 function changeButtonColor (className, movie) {
   const bookmarkButton = className.querySelector('.bookmark-btn')
