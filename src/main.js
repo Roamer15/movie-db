@@ -341,7 +341,7 @@ function showMovies(data) {
   localStorage.setItem('selectedMovie', JSON.stringify(movie))
 
 // Navigate to the second page
-  window.location.href = 'src/preview.html'
+  window.location.href = '/src/preview.html'
 })
   
   genreContainer.appendChild(movieEl)
@@ -539,7 +539,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     localStorage.setItem('selectedMovie', JSON.stringify(movie))
   
     // Navigate to the second page
-    window.location.href = 'src/preview.html'
+    window.location.href = '/src/preview.html'
     })
 
 
@@ -616,7 +616,7 @@ async function loadCarousel(sectionId, endpoint) {
         localStorage.setItem('selectedMovie', JSON.stringify(movie))
     
       // Navigate to the second page
-        window.location.href = 'src/preview.html'
+        window.location.href = '/src/preview.html'
       })
   
 
@@ -670,10 +670,8 @@ async function loadCarouselWide(sectionId, endpoint) {
     localStorage.setItem('selectedMovie', JSON.stringify(movie))
   
     // Navigate to the second page
-    window.location.href = 'src/preview.html'
+    window.location.href = '/src/preview.html'
     })
-
-
 
     carouselContainer.appendChild(movieEl)
   })
