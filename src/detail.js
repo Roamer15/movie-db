@@ -28,11 +28,11 @@ document.querySelector("#detail").innerHTML = `
  <section id="hero-banner" class="hero-banner">
      <div class="movie-content">
       <h1 id="movie-title">Movie Title</h1>
-      <span id="greyText"></span>
+      <span id="greytext"></span>
       <div id="playBtn">
-          <button id="playOne"><i class="fa-solid fa-circle-play"></i> Play Now</button>
-          <button id="playThree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
-          <button class="bookmark-btn" id="playTwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
+          <button id="playone"><i class="fa-solid fa-circle-play"></i> Play Now</button>
+          <button id="playthree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
+          <button class="bookmark-btn" id="playtwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
       </div>
     </div>
   </section>
@@ -54,7 +54,7 @@ document.querySelector("#detail").innerHTML = `
   </section>
 
    <section class="footer">
-        <div class="footerOne">
+        <div class="footerone">
           <div class="contact">
             <h3>Our platform it trusted by millions & features best updated movies all around the world.</h3>
           </div>
@@ -66,7 +66,7 @@ document.querySelector("#detail").innerHTML = `
             </ul>
           </div>
         </div>
-        <div class="footerTwo">
+        <div class="footertwo">
           <div class="newsletter">
             <p>Home / Discover / Influence / Release</p>
           </div>
@@ -92,13 +92,13 @@ const IMG_PATH = "https://image.tmdb.org/t/p/w500"
 
 if (movie) {
   // Populate your HTML elements with movie data
-  const movieSection = document.getElementById("hero-banner")
+  const movieSection = document.getElementById('hero-banner')
   movieSection.style.backgroundImage = `url('https://image.tmdb.org/t/p/w1280${
     movie.backdrop_path || movie.poster_path
   })')`
-  document.getElementById("movie-title").textContent = movie.title
-  document.getElementById("movie-overview").textContent = movie.overview
-  document.getElementById("greyText").textContent = `Date: ${movie.release_date} | Popularity score:${movie.popularity}`;
+  document.getElementById('movie-title').textContent = movie.title
+  document.getElementById('movie-overview').textContent = movie.overview
+  document.getElementById('greytext').textContent = `Date: ${movie.release_date} | Popularity score:${movie.popularity}`;
 } 
 
 else {

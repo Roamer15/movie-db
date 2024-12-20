@@ -36,7 +36,7 @@ a[type="active"] {
 #navabar {
   background-color: #1a1a1a;
   padding: 39px 75px;
-  color: #ffffff;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,7 +84,6 @@ button {
   color: #ebe9e9;
   align-items: center;
   font-weight: 900;
-  position: relative;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -98,19 +97,19 @@ button {
   }
 }
 
-#playOne {
+#playone {
   background-color: #00925d;
   margin-right: 1rem;
   padding: 1rem;
 }
 
-#playTwo {
+#playtwo {
   background-color: transparent;
-  border: 1px solid #ffffff;
+  border: 1px solid #fff;
   padding: 1rem;
 }
 
-#playThree {
+#playthree {
   background-color: #1a1a1a3f;
   border: none;
   backdrop-filter: blur(100px);
@@ -131,7 +130,6 @@ button {
 }
 
 .movie-content {
-  margin-left: 3rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -170,15 +168,11 @@ button {
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(
-    to top,
-    rgba(26, 26, 26, 1),
-    rgba(26, 26, 26, 0)
-  ); /* Dark at bottom, fading to transparent */
+  background: linear-gradient(to top, #1a1a1a, #1a1a1a00); /* Dark at bottom, fading to transparent */
   pointer-events: none;
 }
 
-#greyText {
+#greytext {
   font-style: italic;
   color: grey;
 }
@@ -225,9 +219,9 @@ button {
   padding: 2rem;
 }
 
-.footerOne {
+.footerone {
   align-items: center;
-  color: #ffffff;
+  color: #fff;
 }
 
 .contact {
@@ -236,7 +230,7 @@ button {
   font-weight: bolder;
   width: 70%;
   font-size: 2rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .terms {
@@ -255,7 +249,7 @@ button {
   font-size: 1.5rem;
 }
 
-.footerTwo {
+.footertwo {
   padding-left: 1rem;
   font-size: 1rem;
   font-weight: bold;
@@ -309,6 +303,7 @@ button {
 
   #hero-banner {
     align-items: normal;
+
     h1 {
       font-size: 2rem;
     }
@@ -318,9 +313,9 @@ button {
     }
   }
 
-  #playOne,
-  #playTwo,
-  #playThree {
+  #playone,
+  #playtwo,
+  #playthree {
     padding: 0.5rem;
     margin-bottom: 10px;
   }
