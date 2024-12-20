@@ -96,7 +96,7 @@ document.querySelector("#app").innerHTML = `
       <div class ="overlay"></div>
       </div>
   </section>
-   <section id="mostLiked" class="carousel">
+   <section id="mostliked" class="carousel">
     <h3>Your Likes</h3>
    <div class="carousel-wrapper">
       <div class="carousel-container" id="watchlist-carousel">
@@ -818,7 +818,7 @@ function init() {
   loadHeroBanner();
   loadCarousel("just-released", "/movie/upcoming");
   loadCarouselWide("watchlist", "/movie/top_rated");
-  loadCarouselWide("mostLiked", "/movie/popular");
+  loadCarouselWide("mostliked", "/movie/popular");
 }
 
 init();
