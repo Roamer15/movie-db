@@ -82,8 +82,9 @@ document.querySelector("#detail").innerHTML = `
     </section>
 
 `;
+
 // Retrieve movie details
-const movie = JSON.parse(localStorage.getItem("selectedMovie"));
+const movie = JSON.parse(localStorage.getItem('selectedMovie'));
 console.log(movie);
 
 const API_KEY = "de8d95a8fd855c524e4704e6647ae343";

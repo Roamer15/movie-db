@@ -743,9 +743,16 @@ button:focus-visible {
   min-height: 60px;
 }
 
+.tag:hover {
+  border: 2px #00925d;
+  background-color: #03b876;
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
 /*Favourites*/
 
-.favorites-container {
+/* .favorites-container {
   position: fixed;
   top: 20%;
   left: 50%;
@@ -784,12 +791,45 @@ button:focus-visible {
   display: none;
 }
 
-.tag:hover {
-  border: 2px #00925d;
-  background-color: #03b876;
-  transform: scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+.favorites-container.hidden .active{
+  display: block;
 }
+ */
+
+ .favorites-container {
+  display: none;
+  position: absolute;
+  top: 20%;
+ /*  left: 10%; */
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.favorites-container.active {
+  display: block;
+}
+
+.favorites-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.favorites-container .movie-card {
+  display: block;
+  margin: 10px;
+  text-align: left;
+}
+
+.favorites-container .movie-card img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
 
 .genre-related {
   display: none;
@@ -818,6 +858,7 @@ button:focus-visible {
     font-size: 1rem;
     padding: 8px 10px;
   }
+
 }
 
 .footer {
@@ -1016,20 +1057,21 @@ button:focus-visible {
     margin-right: 20px;
   }
 
-  .genres {
+  .tag {
     display: flex;
     flex-wrap: wrap; /* Allow elements to wrap to the next line */
     justify-content: center; /* Center the boxes horizontally */
   }
 
-  .genreBox {
+  .tag {
     background-color: #333; /* Example background color */
     color: #fff;
-    padding: 10px 15px;
+    padding: 5px;
     margin: 5px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
+    min-width: 120px;
   }
 
   .footer {
@@ -1079,5 +1121,14 @@ button:focus-visible {
   #playThree {
     padding: 0.5rem;
     margin-bottom: 10px;
+  }
+
+  .favorites-list {
+    display: block;
+  }
+
+  .contact {
+   font-size: 0.7rem;
+   width: 100%;
   }
 }

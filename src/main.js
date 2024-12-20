@@ -291,18 +291,23 @@ function getMovies(url) {
     .catch(err => console.error('Error fetching movies:', err.message))
 }
 
+function saveToLocalStorage(movie) {
+  let watchlist = JSON.parse(localStorage.getItem('favourite')) || [] // Retrieve existing watchlist or create empty array
+  const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
+
+  if (!movieExists) {
+    watchlist.push(movie) // Add movie to watchlist
+    localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
+  }
+
+  else {
+    watchlist.pop(movie) // Remove movie from watchlist
+    /* localStorage.removeItem('favourite') // Remove */
+  }
+}
+
 function showMovies(data) {
   const genreContainer = document.querySelector('.genre-related')
-
-  function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-    if (!movieExists) {
-      watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-    }
-  }
 
   genreContainer.innerHTML = ``
   data.forEach(movie => {
@@ -385,7 +390,69 @@ window.addEventListener('click', (event) => {
     favoritesContainer.classList.add("hidden")
   }
 }) */
+/* const toggleAnchor = document.getElementById('favourites-link')
+const favoritesContainer = document.getElementById('favorites-container')
 
+toggleAnchor.addEventListener('click', () => {
+  favoritesContainer.classList.toggle('active')
+  displayFavorites()
+})
+
+const favoritesList = document.getElementById('favorites-list')
+const favMovie = JSON.parse(localStorage.getItem('watchlist'))
+
+function displayFavorites(){
+  const movieFavCard = document.createElement('div')
+  movieFavCard.classList.add('movie-card')
+  movieFavCard.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500${favMovie[0].poster_path}" alt="${favMovie[0].title}">
+    <h3>${favMovie[0].title}</h3>
+    <p>��� ${favMovie[0].vote_average.toFixed(1)}</p>
+  `
+  favoritesList.appendChild(movieFavCard)
+} */
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleAnchor = document.getElementById('favourites-link') // anchor tag
+    const favoritesContainer = document.getElementById('favorites-container')
+    const favoritesList = document.getElementById('favorites-list')
+  
+    // Safeguard in case elements don't exist
+    if (!toggleAnchor || !favoritesContainer || !favoritesList) {
+      console.error("One or more required elements are missing in the DOM.");
+      return
+    }
+  
+    toggleAnchor.addEventListener('click', () => {
+      favoritesContainer.classList.toggle('active') // Toggle container visibility
+      favoritesList.innerHTML = '' // Clear existing content
+      displayFavorites()
+    })
+  
+    function displayFavorites() {
+      const favMovies = JSON.parse(localStorage.getItem('favourite')) || [];
+  
+      if (favMovies.length === 0) {
+        favoritesList.innerHTML = `<p>No favorite movies added yet!</p>`;
+        return
+      }
+  
+      // Loop through movies in local storage
+      favMovies.forEach((movie) => {
+        const movieFavCard = document.createElement('div')
+        movieFavCard.classList.add('movie-card')
+  
+        movieFavCard.innerHTML = `
+          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+          <h3>${movie.title}</h3>
+          <p>⭐ ${movie.vote_average.toFixed(1)}</p>
+        `
+  
+        favoritesList.appendChild(movieFavCard)
+      })
+    }
+  })
+  
 
 // Fetch and populate hero banner
 async function loadHeroBanner () {
@@ -396,17 +463,6 @@ async function loadHeroBanner () {
   const movies = data.results.slice(0, 4)
 
   const slideshow = document.querySelector('.slideshow')
-
-  function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-    if (!movieExists) {
-      watchlist.push(movie); // Add movie to watchlist
-      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-    }
-  }
-
 
   movies.forEach((movie, index) => {
     const slide = document.createElement('div')
@@ -507,17 +563,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Populate the "Popular of the Week" section
 
-  // Store watchlist in localStorage
-  function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-    if (!movieExists) {
-      watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-    }
-  }
-
   async function populatePopularMovies() {
     const movies = await fetchPopularMovies()
     popularContainer.innerHTML = '' // Clear any existing content
@@ -603,16 +648,6 @@ async function loadCarousel(sectionId, endpoint) {
       return
     }
 
-    function saveToLocalStorage(movie) {
-      let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-      const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-      if (!movieExists) {
-        watchlist.push(movie) // Add movie to watchlist
-        localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-      }
-    }
-
     movies.forEach((movie) => {
       const movieEl = document.createElement('div')
       movieEl.classList.add('movie')
@@ -667,16 +702,6 @@ async function loadCarouselWide(sectionId, endpoint) {
   const carouselContainer = document.querySelector(
     `#${sectionId} .carousel-container`
   )
-
-  function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-    if (!movieExists) {
-      watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-    }
-  }
 
   movies.forEach((movie) => {
     const movieEl = document.createElement('div')
@@ -744,16 +769,6 @@ async function loadBottomBanner() {
   const data = await response.json()
   const movies = data.results
 
-  function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-    if (!movieExists) {
-      watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-    }
-  }
-
   const slideshowContainer = document.querySelector('.slideshow-container')
   movies.slice(0, 10).forEach((movie) => {
     // Fetching the top 10 movies
@@ -804,7 +819,7 @@ loadBottomBanner()
 const searchBtn = document.getElementById('search-btn')
 const searchBar = document.getElementById('search-bar')
 
-searchBtn.addEventListener("click", () => {
+searchBtn.addEventListener('click', () => {
   searchBar.classList.toggle('active')
 })
 
@@ -843,16 +858,6 @@ function displaySearchResults(results) {
   if (results.length === 0) {
     searchResults.innerHTML = '<p>No results found.</p>'
     return
-  }
-
-  function saveToLocalStorage(movie) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
-    const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
-
-    if (!movieExists) {
-      watchlist.push(movie) // Add movie to watchlist
-      localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
-    }
   }
 
   results.forEach((movie) => {
