@@ -132,7 +132,7 @@ document.querySelector("#app").innerHTML = `
      </section>
     
       <section class="footer">
-        <div class="footerOne">
+        <div class="footerone">
           <div class="contact">
             <h3>Our platform it trusted by millions & features best updated movies all around the world.</h3>
           </div>
@@ -144,7 +144,7 @@ document.querySelector("#app").innerHTML = `
             </ul>
           </div>
         </div>
-        <div class="footerTwo">
+        <div class="footertwo">
           <div class="newsletter">
             <p>Home / Discover / Influence / Release</p>
           </div>
@@ -418,9 +418,9 @@ async function loadHeroBanner() {
         <h1>${movie.title}</h1>
         <p>${movie.overview}</p>
          <div id="playBtn">
-            <button id="playOne"><i class="fa-solid fa-circle-play"></i> Play Now</button>
-            <button id="playThree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
-            <button class="bookmark-btn" id="playTwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
+            <button id="playone"><i class="fa-solid fa-circle-play"></i> Play Now</button>
+            <button id="playthree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
+            <button class="bookmark-btn" id="playtwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
           </div>
       </div>
     `;
@@ -690,9 +690,9 @@ async function loadBottomBanner() {
     slide.innerHTML = `
                         <div class="slide-caption" onclick="window.location.href = 'src/preview.html'">${movie.title}</div>
                            <div class="hero-bottom-details">
-                           <div id="playBtnDown">
-                            <button id="playOneDown"><i class="fa-solid fa-circle-play"></i> Play Now</button>                            
-                            <button class="bookmark-btn" id="playTwoDown"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
+                           <div id="playbtndown">
+                            <button id="playonedown"><i class="fa-solid fa-circle-play"></i> Play Now</button>                            
+                            <button class="bookmark-btn" id="playtwodown"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
                           </div>
                        </div>
     

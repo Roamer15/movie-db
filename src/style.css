@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
 body {
@@ -46,9 +46,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -61,7 +63,7 @@ button:focus-visible {
 #header {
   background-color: #1a1a1a;
   padding: 39px 75px;
-  color: #ffffff;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,7 +93,7 @@ button:focus-visible {
 .header-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #fff;
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -114,31 +116,24 @@ button {
   transition: border-color 0.25s;
   color: #fff;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 #playBtn {
   margin-top: 1rem;
 }
 
-#playOne {
+#playone {
   background-color: #00925d;
   margin-right: 1rem;
   padding: 1rem;
 }
 
-#playTwo {
+#playtwo {
   background-color: transparent;
-  border: 1px solid #ffffff;
+  border: 1px solid #fff;
   padding: 1rem;
 }
 
-#playThree {
+#playthree {
   background-color: #1a1a1a3f;
   border: none;
   backdrop-filter: blur(100px);
@@ -166,7 +161,7 @@ button:focus-visible {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: #00000080;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
@@ -189,11 +184,7 @@ button:focus-visible {
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(
-    to top,
-    rgba(26, 26, 26, 1),
-    rgba(26, 26, 26, 0)
-  ); /* Dark at bottom, fading to transparent */
+  background: linear-gradient(to top, #1a1a1a, #1a1a1a00); /* Dark at bottom, fading to transparent */
   pointer-events: none;
 }
 
@@ -293,11 +284,12 @@ button:focus-visible {
 .nav-btn:hover {
   opacity: 0.7;
 }
+
 .popular-section {
   margin: 50px 0;
   padding: 0 20px;
   color: white;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
 .popular-section h2 {
@@ -397,7 +389,7 @@ button:focus-visible {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background: #00000080;
   border: none;
   color: white;
   font-size: 1.5rem;
@@ -416,7 +408,7 @@ button:focus-visible {
 }
 
 .scroll-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #000000cc;
 }
 
 .just-released {
@@ -480,11 +472,7 @@ button:focus-visible {
   left: 0;
   right: 0;
   height: 10%;
-  background: linear-gradient(
-    to top,
-    rgba(26, 26, 26, 0.4),
-    rgba(26, 26, 26, 0)
-  ); /* Dark at bottom, fading to transparent */
+  background: linear-gradient(to top, #1a1a1a66, rgba(26, 26, 26, 0)); /* Dark at bottom, fading to transparent */
   pointer-events: none;
 }
 
@@ -504,12 +492,6 @@ button:focus-visible {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
-/* 
-.carousel-container img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-} */
 
 .movie-image img {
   width: 100%;
@@ -558,7 +540,7 @@ button:focus-visible {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #000000b3;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
@@ -622,7 +604,7 @@ button:focus-visible {
   width: 290px;
   height: 210px;
   border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Add a slight shadow for a floating effect */
+  box-shadow: 0px 4px 6px #0000004d; /* Add a slight shadow for a floating effect */
 }
 
 .movie-wide img:hover {
@@ -659,6 +641,7 @@ button:focus-visible {
 }
 
 /* Bottom Banner Styles */
+
 .bottom-banner {
   width: 100%;
   height: 50ch; /* Adjust as needed */
@@ -667,6 +650,7 @@ button:focus-visible {
 }
 
 /* Slideshow container */
+
 .slideshow-container {
   display: flex;
   width: 100%;
@@ -675,6 +659,7 @@ button:focus-visible {
 }
 
 /* Slides */
+
 .slide {
   flex: 0 0 100%;
   width: 100%;
@@ -686,30 +671,31 @@ button:focus-visible {
 }
 
 /* Caption styling (optional) */
+
 .slide-caption {
   position: absolute;
   bottom: 10px;
   left: 20px;
   color: #fff;
-  background: rgba(0, 0, 0, 0.6);
+  background: #00000099;
   padding: 10px 15px;
   border-radius: 5px;
   font-size: 1.2rem;
   margin-top: 3rem;
 }
 
-#playBtnDown {
+#playbtndown {
   margin: 1rem;
 }
 
-#playOneDown {
+#playonedown {
   background-color: #00925d;
   margin-right: 1rem;
   padding: 1rem;
 }
 
-#playTwoDown {
-  background-color: hsla(0, 6%, 86%, 0.4);
+#playtwodown {
+  background-color: #ddd9d966;
   border: 1px solid #b1acac;
   color: #f5f1f1;
   font-weight: bold;
@@ -725,7 +711,7 @@ button:focus-visible {
   scroll-behavior: smooth;
 }
 
-/*Genres*/
+/* Genres */
 
 .tag {
   display: flex;
@@ -740,8 +726,7 @@ button:focus-visible {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
-  box-shadow: 0.3s ease;
-  background-color: hsla(0, 6%, 86%, 0.4);
+  background-color: #ddd9d966;
   cursor: pointer;
   min-width: 300px;
   min-height: 60px;
@@ -751,65 +736,20 @@ button:focus-visible {
   border: 2px #00925d;
   background-color: #03b876;
   transform: scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 10px #00000066;
 }
 
-/*Favourites*/
-
-/* .favorites-container {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 60%;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  padding: 20px;
-  display: none;
-}
-
-.favorites-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-
-.favorites-container .movie-card {
-  width: 200px;
-  text-align: center;
-}
-
-
-.favorites-container .movie-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-
-.favorites-container.hidden {
-  display: none;
-}
-
-.favorites-container.hidden .active{
-  display: block;
-}
- */
+/* Favourites */
 
 .favorites-container {
   display: none;
   position: absolute;
   top: 20%;
-  /*  left: 10%; */
   width: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: #000000e6;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px #0000001a;
   z-index: 10;
 }
 
@@ -870,7 +810,7 @@ button:focus-visible {
   padding: 2rem;
 }
 
-.footerOne {
+.footerone {
   align-items: center;
   color: #ffffff;
 }
@@ -878,7 +818,6 @@ button:focus-visible {
 .contact {
   padding: 0 1rem;
   font-weight: bolder;
-  padding: 0 1rem;
   margin-bottom: 1.5rem;
   width: 70%;
   font-size: 2rem;
@@ -901,7 +840,7 @@ button:focus-visible {
   font-size: 1.5rem;
 }
 
-.footerTwo {
+.footertwo {
   padding-left: 1rem;
   font-size: 1rem;
   font-weight: bold;
@@ -939,7 +878,7 @@ button:focus-visible {
   left: 0;
   width: 100%;
   height: 90vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #000000e6;
   color: white;
   overflow-y: auto;
   z-index: 1000;
@@ -992,10 +931,11 @@ button:focus-visible {
   right: 0;
   width: 50px; /* Width of the overlay */
   height: 100%;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+  background: linear-gradient(to left, #0000004d, transparent);
   pointer-events: none;
   z-index: 5;
 }
+
 /* Media Queries */
 
 @media (max-width: 900px) {
@@ -1060,12 +1000,6 @@ button:focus-visible {
   }
 
   .tag {
-    display: flex;
-    flex-wrap: wrap; /* Allow elements to wrap to the next line */
-    justify-content: center; /* Center the boxes horizontally */
-  }
-
-  .tag {
     background-color: #333; /* Example background color */
     color: #fff;
     padding: 5px;
@@ -1074,6 +1008,9 @@ button:focus-visible {
     text-align: center;
     font-size: 14px;
     min-width: 120px;
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap to the next line */
+    justify-content: center; /* Center the boxes horizontally */
   }
 
   .footer {
@@ -1081,14 +1018,14 @@ button:focus-visible {
     flex-wrap: wrap;
   }
 
-  #playBtnDown {
+  #playbtndown {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  #playOneDown,
-  #playTwoDown {
+  #playonedown,
+  #playtwodown {
     padding: 0.5rem;
   }
 
@@ -1118,9 +1055,9 @@ button:focus-visible {
     margin-left: 1rem;
   }
 
-  #playOne,
-  #playTwo,
-  #playThree {
+  #playone,
+  #playtwo,
+  #playthree {
     padding: 0.5rem;
     margin-bottom: 10px;
   }
