@@ -274,7 +274,6 @@ button:focus-visible {
   z-index: 10;
   display: flex;
   align-items: center;
-  /* border-radius: 50%; */
   top: 50%;
   height: 15px;
   width: 15px;
@@ -801,11 +800,11 @@ button:focus-visible {
 }
  */
 
- .favorites-container {
+.favorites-container {
   display: none;
   position: absolute;
   top: 20%;
- /*  left: 10%; */
+  /*  left: 10%; */
   width: 100%;
   background: rgba(0, 0, 0, 0.9);
   padding: 20px;
@@ -835,7 +834,6 @@ button:focus-visible {
   border-radius: 8px;
 }
 
-
 .genre-related {
   display: none;
   overflow-x: auto;
@@ -863,7 +861,6 @@ button:focus-visible {
     font-size: 1rem;
     padding: 8px 10px;
   }
-
 }
 
 .footer {
@@ -885,7 +882,7 @@ button:focus-visible {
   margin-bottom: 1.5rem;
   width: 70%;
   font-size: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .terms {
@@ -996,9 +993,9 @@ button:focus-visible {
   width: 50px; /* Width of the overlay */
   height: 100%;
   background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
-  pointer-events: none; 
+  pointer-events: none;
   z-index: 5;
-} 
+}
 /* Media Queries */
 
 @media (max-width: 900px) {
@@ -1133,7 +1130,7 @@ button:focus-visible {
   }
 
   .contact {
-   font-size: 0.7rem;
-   width: 100%;
+    font-size: 0.7rem;
+    width: 100%;
   }
 }
