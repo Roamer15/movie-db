@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -45,6 +45,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: #fff;
 }
 
 button:hover {
@@ -104,20 +105,7 @@ button:focus-visible {
   border: none;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  color: #fff;
-}
-
-#playBtn {
+#playbtn {
   margin-top: 1rem;
 }
 
@@ -289,7 +277,7 @@ button {
   margin: 50px 0;
   padding: 0 20px;
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .popular-section h2 {
@@ -408,7 +396,7 @@ button {
 }
 
 .scroll-btn:hover {
-  background: #000000cc;
+  background: #000c;
 }
 
 .just-released {
@@ -472,7 +460,7 @@ button {
   left: 0;
   right: 0;
   height: 10%;
-  background: linear-gradient(to top, #1a1a1a66, rgba(26, 26, 26, 0)); /* Dark at bottom, fading to transparent */
+  background: linear-gradient(to top, #1a1a1a66, #1a1a1a00); /* Dark at bottom, fading to transparent */
   pointer-events: none;
 }
 
@@ -604,7 +592,7 @@ button {
   width: 290px;
   height: 210px;
   border-radius: 8px;
-  box-shadow: 0px 4px 6px #0000004d; /* Add a slight shadow for a floating effect */
+  box-shadow: 0 4px 6px #0000004d; /* Add a slight shadow for a floating effect */
 }
 
 .movie-wide img:hover {
@@ -677,7 +665,7 @@ button {
   bottom: 10px;
   left: 20px;
   color: #fff;
-  background: #00000099;
+  background: #0009;
   padding: 10px 15px;
   border-radius: 5px;
   font-size: 1.2rem;
@@ -724,7 +712,7 @@ button {
   margin: 10px;
   border: 2px solid #ffffffb3;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px #0000004d;
   transition: transform 0.3s ease;
   background-color: #ddd9d966;
   cursor: pointer;
@@ -736,7 +724,7 @@ button {
   border: 2px #00925d;
   background-color: #03b876;
   transform: scale(1.05);
-  box-shadow: 0 6px 10px #00000066;
+  box-shadow: 0 6px 10px #0006;
 }
 
 /* Favourites */
@@ -812,7 +800,7 @@ button {
 
 .footerone {
   align-items: center;
-  color: #ffffff;
+  color: #fff;
 }
 
 .contact {
@@ -1046,6 +1034,7 @@ button {
     h1 {
       font-size: 18px;
     }
+
     p {
       font-size: 12px;
     }
