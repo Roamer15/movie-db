@@ -106,12 +106,12 @@ if (movie) {
 }
 
 function saveToLocalStorage (movie) {
-  const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [] // Retrieve existing watchlist or create empty array
+  const watchlist = JSON.parse(localStorage.getItem('favourite')) || [] // Retrieve existing watchlist or create empty array
   const movieExists = watchlist.some((item) => item.id === movie.id) // Check if the movie already exists
 
   if (!movieExists) {
     watchlist.push(movie) // Add movie to watchlist
-    localStorage.setItem('watchlist', JSON.stringify(watchlist)) // Save updated list
+    localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
   }
 }
 
@@ -129,18 +129,44 @@ bookmarkButton.addEventListener('click', () => {
   saveToLocalStorage(movie)
 })
 
-async function sameClassMovies (movieId) {
+function changeButtonColor (className, movie) {
+  const bookmarkButton = className.querySelector('.bookmark-btn')
+
+  if (!bookmarkButton) {
+    console.error('Bookmark button not found within the provided element.')
+    return
+  }
+
+  bookmarkButton.addEventListener('click', () => {
+    const icon = bookmarkButton.querySelector('i')
+
+    if (!icon) {
+      console.error('Icon inside the bookmark button is not found.')
+      return
+    }
+
+    // Toggle bookmark icon classes and color
+    icon.classList.toggle('fa-regular')
+    icon.classList.toggle('fa-solid')
+    icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green if solid
+
+    // Save or remove movie from localStorage
+    saveToLocalStorage(movie)
+  })
+}
+
+async function sameClassMovies () {
   // Get movie ID from localStorage instead of URL
   const popularContainer = document.querySelector('.carousel-container')
-  console.log(movieId)
-  if (!movieId) {
+  console.log(movie.id)
+  if (!movie.id) {
     console.error('Error: Movie ID not found.')
     return
   }
 
   try {
     const response = await fetch(
-      `${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`
+      `${BASE_URL}/movie/${movie.id}/similar?api_key=${API_KEY}`
     )
     if (!response.ok) {
       console.error(`Error fetching similar movies: ${response.status}`)
@@ -170,23 +196,11 @@ async function sameClassMovies (movieId) {
           </div>
         `
       similarMoviesContainer.appendChild(movieEl)
+      changeButtonColor(movieEl, movie)
     })
   } catch (error) {
     console.error('Error fetching similar movies:', error.message)
   }
-
-  const bookmarkButton = movieEl.querySelector('.bookmark-btn')
-
-  bookmarkButton.addEventListener('click', () => {
-    // Toggle bookmark icon color
-    const icon = bookmarkButton.querySelector('i')
-    icon.classList.toggle('fa-regular')
-    icon.classList.toggle('fa-solid')
-    icon.style.color = icon.classList.contains('fa-solid') ? 'green' : '' // Green when solid
-
-    // Save movie to localStorage
-    saveToLocalStorage(movie)
-  })
 
   const prevBtn = document.querySelector('.prev')
   const nextBtn = document.querySelector('.next')
@@ -201,4 +215,4 @@ async function sameClassMovies (movieId) {
 }
 
 // Call the function
-sameClassMovies(movie.id)
+sameClassMovies()
