@@ -312,6 +312,16 @@ function saveToLocalStorage(movie) {
   }
 }
 
+function redirectToDetailPage (movieToRedirect) {
+  const movieImage = movieToRedirect.querySelector('img') // Select the image element
+  movieImage.addEventListener('click', () => {
+  // Save movie details to localStorage
+  localStorage.setItem('selectedMovie', JSON.stringify(movie))
+
+  // Navigate to the second page
+  window.location.href = '/src/preview.html'
+  })
+}
 
 function showMovies(data) {
   const genreContainer = document.querySelector('.genre-related')
@@ -335,14 +345,7 @@ function showMovies(data) {
     saveToLocalStorage(movie)
   })
 
-  const movieImage = movieEl.querySelector('img') // Select the image element
-  movieImage.addEventListener('click', () => {
-// Save movie details to localStorage
-  localStorage.setItem('selectedMovie', JSON.stringify(movie))
-
-// Navigate to the second page
-  window.location.href = '/src/preview.html'
-})
+  redirectToDetailPage (movieEl)
   
   genreContainer.appendChild(movieEl)
   })
@@ -431,14 +434,8 @@ async function loadHeroBanner () {
       saveToLocalStorage(movie)
     })
 
-    const movieImage = slide.querySelector('img') // Select the image element
-    movieImage.addEventListener('click', () => {
-    // Save movie details to localStorage
-    localStorage.setItem('selectedMovie', JSON.stringify(movie))
   
-    // Navigate to the second page
-    window.location.href = '/src/preview.html'
-    })
+    redirectToDetailPage (slide)
 
 
     slideshow.appendChild(slide)
@@ -533,14 +530,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         saveToLocalStorage(movie)
       })
 
-      const movieImage = movieCard.querySelector('img') // Select the image element
-    movieImage.addEventListener('click', () => {
-    // Save movie details to localStorage
-    localStorage.setItem('selectedMovie', JSON.stringify(movie))
-  
-    // Navigate to the second page
-    window.location.href = '/src/preview.html'
-    })
+ 
+      redirectToDetailPage (movieCard)
 
 
       popularContainer.appendChild(movieCard)
@@ -610,15 +601,8 @@ async function loadCarousel(sectionId, endpoint) {
           saveToLocalStorage(movie)
         })
   
-        const movieImage = movieEl.querySelector('img') // Select the image element
-        movieImage.addEventListener('click', () => {
-      // Save movie details to localStorage
-        localStorage.setItem('selectedMovie', JSON.stringify(movie))
-    
-      // Navigate to the second page
-        window.location.href = '/src/preview.html'
-      })
-  
+
+        redirectToDetailPage (movieEl)
 
       carouselContainer.appendChild(movieEl)
     })
@@ -664,14 +648,8 @@ async function loadCarouselWide(sectionId, endpoint) {
       saveToLocalStorage(movie)
     })
 
-    const movieImage = movieEl.querySelector('img') // Select the image element
-    movieImage.addEventListener('click', () => {
-    // Save movie details to localStorage
-    localStorage.setItem('selectedMovie', JSON.stringify(movie))
-  
-    // Navigate to the second page
-    window.location.href = '/src/preview.html'
-    })
+
+    redirectToDetailPage (movieEl)
 
     carouselContainer.appendChild(movieEl)
   })
@@ -823,14 +801,7 @@ function displaySearchResults(results) {
       saveToLocalStorage(movie)
     })
 
-    const movieImage = movieEl.querySelector('img') // Select the image element
-    movieImage.addEventListener('click', () => {
-    // Save movie details to localStorage
-    localStorage.setItem('selectedMovie', JSON.stringify(movie))
-  
-    // Navigate to the second page
-    window.location.href = 'src/preview.html'
-    })
+    redirectToDetailPage (movieEl)
 
 
     searchResults.appendChild(movieEl)
