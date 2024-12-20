@@ -319,7 +319,7 @@ function redirectToDetailPage (movieToRedirect, movie) {
   localStorage.setItem('selectedMovie', JSON.stringify(movie))
 
   // Navigate to the second page
-  window.location.href = '/src/preview.html'
+  window.location.href = '/preview.html'
   })
 }
 
