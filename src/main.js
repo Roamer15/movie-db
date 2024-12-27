@@ -436,7 +436,7 @@ async function loadHeroBanner () {
     const slide = document.createElement('div')
     slide.classList.add('slide')
     if (index === 0) slide.classList.add('active') // Set the first slide as active
-
+    
     slide.innerHTML = `
       <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
       <div class="hero-details">
@@ -469,7 +469,7 @@ function setupHeroNavigation () {
 
   function showSlide (index) {
     slides[currentSlide].classList.remove('active')
-    currentSlide = (index + slides.length) % slides.length
+    currentSlide = (index + slides.length + 1) % (slides.length - 1)
     slides[currentSlide].classList.add('active')
   }
 
