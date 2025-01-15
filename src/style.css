@@ -28,6 +28,7 @@ input[type="text"] {
 
 a:hover {
   color: #00925d;
+  transition: ease-in-out 0.4s;
 }
 
 a[type="active"] {
@@ -87,6 +88,10 @@ button:focus-visible {
   color: #00925d;
 }
 
+#buttons :focus{
+  border: transparent;
+}
+
 #logo {
   cursor: pointer;
 }
@@ -129,10 +134,17 @@ button:focus-visible {
   margin-right: 1rem;
 }
 
+#playtwoshort {
+  display: none;
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 1rem;
+}
+
 /* Hero Banner */
 .hero-banner {
   position: relative;
-  height: 100vh;
+  height: 50rem;
   overflow: hidden;
 }
 
@@ -843,7 +855,7 @@ button:focus-visible {
 #search-bar {
   display: none; /* Initially hidden */
   opacity: 0; /* Invisible */
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease, 0.5s ease-in-out;
 }
 
 #search-bar.active {
@@ -945,8 +957,12 @@ button:focus-visible {
     font-size: 12px;
   }
 
-  .header-btn {
-    display: none;
+  #buttons {
+    padding: 5px 15px;
+
+    button {
+      padding: 0.3rem;
+    }
   }
 
   #search-btn {
@@ -972,6 +988,10 @@ button:focus-visible {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+  }
+
+  .hero-banner {
+    height: 60vh;
   }
 
   #movie-partners {
@@ -1040,15 +1060,36 @@ button:focus-visible {
     }
   }
 
+  .hero-banner .slide {
+    align-items: end;
+  }
+
   .hero-details {
     margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    bottom: 100;
+  }
+
+  #playBtn {
+    display: flex;
   }
 
   #playone,
   #playtwo,
-  #playthree {
-    padding: 0.5rem;
+  #playthree,
+  #playtwoshort {
+    padding: 0.5rem 1rem;
     margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  #playtwo {
+    display: none;
+  }
+
+  #playtwoshort {
+    display: flex;
   }
 
   .favorites-list {

@@ -271,6 +271,14 @@ button {
     display: block;
   }
 
+  #navabar {
+    padding: 5px 15px;
+
+    button {
+      padding: 0.3rem;
+    }
+  }
+
   #search-bar.active {
     display: inline-block;
     opacity: 1;
