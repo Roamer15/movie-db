@@ -160,7 +160,7 @@ document.querySelector('#app').innerHTML = `
 
 `
 
-const API_KEY = ''
+const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
 const BASE_URL = 'https://api.themoviedb.org/3'
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
@@ -446,6 +446,7 @@ async function loadHeroBanner () {
             <button id="playone"><i class="fa-solid fa-circle-play"></i> Play Now</button>
             <button id="playthree"><i class="fa-regular fa-circle-play"></i> Watch Trailer</button>
             <button class="bookmark-btn" id="playtwo"><i class="fa-regular fa-bookmark"></i> Add Watchlist</button>
+            <button class="bookmark-btn" id="playtwoshort"><i class="fa-regular fa-bookmark"></i></button>
           </div>
       </div>
     `
