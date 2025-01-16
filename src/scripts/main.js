@@ -1,4 +1,4 @@
-import './style.css'
+import '../../../../../../../../src/styles/style.css'
 
 document.querySelector('#app').innerHTML = `
       <div id="header">
@@ -9,7 +9,19 @@ document.querySelector('#app').innerHTML = `
            <div class="bars">
             <img src="/images/Logo.png" alt="logo" id="symbol">
             <i class="fa-solid fa-bars"></i>
-            </div>
+          </div>
+
+          <div id="side-navbar" class="hidden">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Movie Release</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#" class="menu-item" id="favourites-link">Favourites</a></li>
+                <li><a href="#">About</a></li>
+              </ul>
+          </div>
+
           <div id="menu">
             <a href="#" class="menu-item" type="active">Home</a>
             <a href="#" class="menu-item">Discover</a>
@@ -162,7 +174,7 @@ document.querySelector('#app').innerHTML = `
 
 const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
 const BASE_URL = 'https://api.themoviedb.org/3'
-const IMG_ = 'https://image.tmdb.org/t/p/w500'
+const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
 const API_GENRE_URL = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`
 
@@ -255,20 +267,20 @@ function genreDisplay () {
     const t = document.createElement('div')
     t.classList.add('tag')
     // const genreBackgrounds = {
-    //   Action: 'url(action.jpg)',
-    //   Adventure: 'url(adventure.jpg)',
-    //   Animation: 'url(animation.jpg)',
-    //   Comedy: 'url(comedy.jpg)',
-    //   Crime: 'url(crime.jpg)',
-    //   Documentary: 'url(documentary.jpg)',
-    //   Drama: 'url(drama.jpg)',
-    //   Family: 'url(family.jpg)',
-    //   Fantasy: 'url(fantasy.jpg)',
-    //   History: 'url(history.jpg)',
-    //   Horror: 'url(horror.jpg)',
-    //   Music: 'url(music.jpg)',
-    //   Mystery: 'url(mystery.jpg)',
-    //   Romance: 'url(romance.jpg)',
+    //   Action: 'url(path-to-action-image.jpg)',
+    //   Adventure: 'url(path-to-adventure-image.jpg)',
+    //   Animation: 'url(path-to-animation-image.jpg)',
+    //   Comedy: 'url(path-to-comedy-image.jpg)',
+    //   Crime: 'url(path-to-crime-image.jpg)',
+    //   Documentary: 'url(path-to-documentary-image.jpg)',
+    //   Drama: 'url(path-to-drama-image.jpg)',
+    //   Family: 'url(path-to-family-image.jpg)',
+    //   Fantasy: 'url(path-to-fantasy-image.jpg)',
+    //   History: 'url(path-to-history-image.jpg)',
+    //   Horror: 'url(path-to-horror-image.jpg)',
+    //   Music: 'url(path-to-music-image.jpg)',
+    //   Mystery: 'url(path-to-mystery-image.jpg)',
+    //   Romance: 'url(path-to-romance.jpg)',
     //   Science Fiction: 'url(science-fiction.jpg)',
     //   TV Movie: 'url(tv-movie.jpg)',
     //   Thriller: 'url(thriller.jpg)',
@@ -355,7 +367,7 @@ function showMovies (data) {
     const movieEl = document.createElement('div')
     movieEl.classList.add('movie')
     movieEl.innerHTML = `
-      <img src="${IMG_}${movie.poster_}" alt="${movie.title}">
+      <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
       <h3>${movie.title}</h3>
        <span>⭐ ${movie.vote_average.toFixed(
          1
@@ -409,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
       movieFavCard.classList.add('movie-card')
 
       movieFavCard.innerHTML = `
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_}" alt="${
+          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
         movie.title
       }">
           <h3>${movie.title}</h3>
@@ -463,7 +475,7 @@ async function loadHeroBanner () {
     if (index === 0) slide.classList.add('active') // Set the first slide as active
 
     slide.innerHTML = `
-      <img src="${IMG_}${movie.backdrop_}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
+      <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
       <div class="hero-details">
         <h1>${movie.title}</h1>
         <p>${movie.overview}</p>
@@ -545,7 +557,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       movieCard.innerHTML = `
       <div class="rank">${index + 1}</div>
-      <img src="${IMG_ + movie.poster_}" alt="${
+      <img src="${IMG_PATH + movie.poster_path}" alt="${
         movie.title
       }" onclick="window.location.href = 'src/preview.html'">
       <div class="movie-details">
@@ -608,7 +620,7 @@ async function loadCarousel (sectionId, endpoint) {
       movieEl.classList.add('movie')
       movieEl.innerHTML = `
           <div class="movie-image">
-            <img src="${IMG_}${movie.poster_}" alt="${
+            <img src="${IMG_PATH}${movie.poster_path}" alt="${
         movie.title
       }" onclick="window.location.href = 'src/preview.html'">
             <div class="movie-overlay">
@@ -649,7 +661,7 @@ async function loadCarouselWide (sectionId, endpoint) {
     movieEl.classList.add('movie-wide')
     movieEl.innerHTML = `
         <div class="movie-img">
-          <img src="${IMG_}${movie.poster_}" alt="${movie.title}">
+          <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
           <div class="movie-overlay-wide">
             <h3>${movie.title}</h3>
             <span>⭐ ${movie.vote_average.toFixed(
@@ -698,7 +710,7 @@ async function loadBottomBanner () {
     // Fetching the top 10 movies
     const slide = document.createElement('div')
     slide.classList.add('slide')
-    slide.style.backgroundImage = `url(${IMG_}${movie.backdrop_})` // Use backdrop image
+    slide.style.backgroundImage = `url(${IMG_PATH}${movie.backdrop_path})` // Use backdrop image
     slide.innerHTML = `
                         <div class="slide-caption" onclick="window.location.href = 'src/preview.html'">${movie.title}</div>
                            <div class="hero-bottom-details">
@@ -781,8 +793,8 @@ function displaySearchResults (results) {
     movieEl.classList.add('movie-result')
     movieEl.innerHTML = `
       <img src="${
-        movie.poster_
-          ? IMG_ + movie.poster_
+        movie.poster_path
+          ? IMG_PATH + movie.poster_path
           : 'https://via.placeholder.com/100'
       }" 
            alt="${movie.title}" onclick="previewPage()">
@@ -808,6 +820,24 @@ document.addEventListener('click', (e) => {
   if (!searchResults.contains(e.target) && !searchBar.contains(e.target)) {
     searchResults.style.display = 'none'
   }
+})
+
+const bars = document.querySelector('.bars')
+const sideNavbar = document.getElementById('side-navbar')
+const overlay = document.createElement('div')
+overlay.id = 'overlay'
+document.body.appendChild(overlay)
+
+// Toggle Side Navbar
+bars.addEventListener('click', () => {
+  sideNavbar.classList.toggle('show')
+  overlay.classList.toggle('active')
+})
+
+// Close Side Navbar when clicking on the overlay
+overlay.addEventListener('click', () => {
+  sideNavbar.classList.remove('show')
+  overlay.classList.remove('active')
 })
 
 function init () {
