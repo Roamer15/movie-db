@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-absolute-path
-import '/src/styles/style.css'
+import '../styles/style.css'
 
 document.querySelector('#app').innerHTML = `
       <div id="header">

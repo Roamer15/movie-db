@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-absolute-path
-import '/src/styles/movie.css'
+import '../styles/movie.css'
 
 document.querySelector('#detail').innerHTML = `
      <div id="navabar">
