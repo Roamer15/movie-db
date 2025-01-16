@@ -1,4 +1,4 @@
-import '../../../../../../../../src/styles/movie.css'
+import '/src/styles/movie.css'
 
 document.querySelector('#detail').innerHTML = `
      <div id="navabar">
