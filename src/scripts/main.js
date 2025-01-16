@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-absolute-path
 import '../styles/style.css'
 
 document.querySelector('#app').innerHTML = `
