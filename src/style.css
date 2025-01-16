@@ -1068,7 +1068,6 @@ button:focus-visible {
     margin-left: 1rem;
     display: flex;
     flex-direction: column;
-    bottom: 100;
   }
 
   #playBtn {
