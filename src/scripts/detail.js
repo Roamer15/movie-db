@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-absolute-path
 import '/src/styles/movie.css'
 
 document.querySelector('#detail').innerHTML = `
@@ -98,7 +99,7 @@ document.querySelector('#detail').innerHTML = `
 const movie = JSON.parse(localStorage.getItem('selectedMovie'))
 console.log(movie)
 
-const API_KEY = ''
+const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
 const BASE_URL = 'https://api.themoviedb.org/3'
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 

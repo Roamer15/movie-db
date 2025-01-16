@@ -1,4 +1,5 @@
-import '../../../../../../../../src/styles/style.css'
+// eslint-disable-next-line import/no-absolute-path
+import '/src/styles/style.css'
 
 document.querySelector('#app').innerHTML = `
       <div id="header">
@@ -172,7 +173,7 @@ document.querySelector('#app').innerHTML = `
 
 `
 
-const API_KEY = ''
+const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
 const BASE_URL = 'https://api.themoviedb.org/3'
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
