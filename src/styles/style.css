@@ -1014,12 +1014,7 @@ button:focus-visible {
     padding: 0 5px;
     font-size: 12px;
   }
-
-  .movie-overlay button:focus {
-    outline: none;
-    border: none;
-  }
-
+  
   .movie-overlay button {
     background-color: transparent;
     padding: 0.6em 0.1em;
@@ -1030,6 +1025,11 @@ button:focus-visible {
     background-color: transparent;
     padding: 0.6em 0.1em;
     margin-left: 1rem;
+    border: none;
+  }
+
+  .movie-overlay button:focus {
+    outline: none;
     border: none;
   }
 
@@ -1125,7 +1125,6 @@ button:focus-visible {
     text-align: left;
   }
 
-
   .movie-overlay-wide {
     text-align: left;
     padding-left: 0.7em;
@@ -1149,7 +1148,7 @@ button:focus-visible {
     pointer-events: none;
   }
 
-  .hero-bottom-details{
+  .hero-bottom-details {
     align-self: end;
   }
 
