@@ -1,4 +1,4 @@
-import './style.css'
+import '/src/styles/style.css'
 
 document.querySelector('#app').innerHTML = `
       <div id="header">
@@ -9,7 +9,19 @@ document.querySelector('#app').innerHTML = `
            <div class="bars">
             <img src="/images/Logo.png" alt="logo" id="symbol">
             <i class="fa-solid fa-bars"></i>
-            </div>
+          </div>
+
+          <div id="side-navbar" class="hidden">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Movie Release</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#" class="menu-item" id="favourites-link">Favourites</a></li>
+                <li><a href="#">About</a></li>
+              </ul>
+          </div>
+
           <div id="menu">
             <a href="#" class="menu-item" type="active">Home</a>
             <a href="#" class="menu-item">Discover</a>
@@ -254,6 +266,31 @@ function genreDisplay () {
   genres.forEach((genre) => {
     const t = document.createElement('div')
     t.classList.add('tag')
+    // const genreBackgrounds = {
+    //   Action: 'url(path-to-action-image.jpg)',
+    //   Adventure: 'url(path-to-adventure-image.jpg)',
+    //   Animation: 'url(path-to-animation-image.jpg)',
+    //   Comedy: 'url(path-to-comedy-image.jpg)',
+    //   Crime: 'url(path-to-crime-image.jpg)',
+    //   Documentary: 'url(path-to-documentary-image.jpg)',
+    //   Drama: 'url(path-to-drama-image.jpg)',
+    //   Family: 'url(path-to-family-image.jpg)',
+    //   Fantasy: 'url(path-to-fantasy-image.jpg)',
+    //   History: 'url(path-to-history-image.jpg)',
+    //   Horror: 'url(path-to-horror-image.jpg)',
+    //   Music: 'url(path-to-music-image.jpg)',
+    //   Mystery: 'url(path-to-mystery-image.jpg)',
+    //   Romance: 'url(path-to-romance.jpg)',
+    //   Science Fiction: 'url(science-fiction.jpg)',
+    //   TV Movie: 'url(tv-movie.jpg)',
+    //   Thriller: 'url(thriller.jpg)',
+    //   War: 'url(war.jpg)',
+    //   Western: 'url(western.jpg)',
+    // };
+    // t.style.backgroundImage = genreBackgrounds[genre.name] || 'url(default-image.jpg)';
+    // t.style.backgroundSize = 'cover';
+    // t.style.backgroundPosition = 'center';
+
     t.id = genre.id
     t.innerText = genre.name
 
@@ -783,6 +820,24 @@ document.addEventListener('click', (e) => {
   if (!searchResults.contains(e.target) && !searchBar.contains(e.target)) {
     searchResults.style.display = 'none'
   }
+})
+
+const bars = document.querySelector('.bars')
+const sideNavbar = document.getElementById('side-navbar')
+const overlay = document.createElement('div')
+overlay.id = 'overlay'
+document.body.appendChild(overlay)
+
+// Toggle Side Navbar
+bars.addEventListener('click', () => {
+  sideNavbar.classList.toggle('show')
+  overlay.classList.toggle('active')
+})
+
+// Close Side Navbar when clicking on the overlay
+overlay.addEventListener('click', () => {
+  sideNavbar.classList.remove('show')
+  overlay.classList.remove('active')
 })
 
 function init () {
