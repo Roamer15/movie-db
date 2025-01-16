@@ -1,4 +1,4 @@
-import './movie.css'
+import '/src/styles/movie.css'
 
 document.querySelector('#detail').innerHTML = `
      <div id="navabar">
@@ -10,6 +10,18 @@ document.querySelector('#detail').innerHTML = `
             <img src="/images/Logo.png" alt="logo" id="symbol">
             <i class="fa-solid fa-bars"></i>
             </div>
+            <div id="side-navbar" class="hidden">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Movie Release</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">Favourites</a></li>
+                <li><a href="#">About</a></li>
+              </ul>
+          </div>
+          <div id="overlay"></div>
+
           <div id="menu">
             <a href="../index.html" class="menu-item" type="active">Home</a>
             <a href="#" class="menu-item">Discover</a>
@@ -86,7 +98,7 @@ document.querySelector('#detail').innerHTML = `
 const movie = JSON.parse(localStorage.getItem('selectedMovie'))
 console.log(movie)
 
-const API_KEY = ''
+const API_KEY = 'de8d95a8fd855c524e4704e6647ae343'
 const BASE_URL = 'https://api.themoviedb.org/3'
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 
@@ -200,6 +212,22 @@ async function sameClassMovies () {
     popularContainer.scrollLeft += 300
   })
 }
+
+const bars = document.querySelector('.bars')
+const sideNavbar = document.getElementById('side-navbar')
+const overlay = document.getElementById('overlay')
+
+// Toggle Side Navbar
+bars.addEventListener('click', () => {
+  sideNavbar.classList.toggle('show')
+  overlay.classList.toggle('active')
+})
+
+// Close Side Navbar when clicking on the overlay
+overlay.addEventListener('click', () => {
+  sideNavbar.classList.remove('show')
+  overlay.classList.remove('active')
+})
 
 // Call the function
 sameClassMovies()
