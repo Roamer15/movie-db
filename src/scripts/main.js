@@ -266,30 +266,6 @@ function genreDisplay () {
   genres.forEach((genre) => {
     const t = document.createElement('div')
     t.classList.add('tag')
-    // const genreBackgrounds = {
-    //   Action: 'url(path-to-action-image.jpg)',
-    //   Adventure: 'url(path-to-adventure-image.jpg)',
-    //   Animation: 'url(path-to-animation-image.jpg)',
-    //   Comedy: 'url(path-to-comedy-image.jpg)',
-    //   Crime: 'url(path-to-crime-image.jpg)',
-    //   Documentary: 'url(path-to-documentary-image.jpg)',
-    //   Drama: 'url(path-to-drama-image.jpg)',
-    //   Family: 'url(path-to-family-image.jpg)',
-    //   Fantasy: 'url(path-to-fantasy-image.jpg)',
-    //   History: 'url(path-to-history-image.jpg)',
-    //   Horror: 'url(path-to-horror-image.jpg)',
-    //   Music: 'url(path-to-music-image.jpg)',
-    //   Mystery: 'url(path-to-mystery-image.jpg)',
-    //   Romance: 'url(path-to-romance.jpg)',
-    //   Science Fiction: 'url(science-fiction.jpg)',
-    //   TV Movie: 'url(tv-movie.jpg)',
-    //   Thriller: 'url(thriller.jpg)',
-    //   War: 'url(war.jpg)',
-    //   Western: 'url(western.jpg)',
-    // };
-    // t.style.backgroundImage = genreBackgrounds[genre.name] || 'url(default-image.jpg)';
-    // t.style.backgroundSize = 'cover';
-    // t.style.backgroundPosition = 'center';
 
     t.id = genre.id
     t.innerText = genre.name
@@ -302,7 +278,6 @@ function genreDisplay () {
       } else {
         selectedGenre.push(genre.id) // Add genre
       }
-      console.log(selectedGenre)
 
       const DISCOVER_URL = `${BASE_URL}/discover/movie?api_key=${API_KEY}`
       getMovies(
@@ -325,7 +300,6 @@ function getMovies (url) {
       return res.json()
     })
     .then((data) => {
-      console.log(data.results) // Debugging line
       showMovies(data.results)
     })
     .catch((err) => console.error('Error fetching movies:', err.message))
@@ -339,12 +313,10 @@ function saveToLocalStorage (movie) {
     // Add movie to watchlist
     watchlist.push(movie)
     localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
-    console.log(`${movie.title} has been added to your favorites.`)
   } else {
     // Remove movie from watchlist
     watchlist = watchlist.filter((item) => item.id !== movie.id) // Create a new array without the removed movie
     localStorage.setItem('favourite', JSON.stringify(watchlist)) // Save updated list
-    console.log(`${movie.title} has been removed from your favorites.`)
   }
 }
 
