@@ -1,0 +1,1249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+  line-height: 1.5;
+}
+
+a {
+  font-weight: 500;
+  color: #fffffff5;
+  text-decoration: inherit;
+}
+
+input[type="text"] {
+  display: contents;
+  border-radius: 20px;
+  border: 1px solid #00925d;
+  background-color: white;
+  padding: 0.4rem;
+  margin-left: 1rem;
+}
+
+a:hover {
+  color: #00925d;
+  transition: ease-in-out 0.4s;
+}
+
+a[type="active"] {
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: #fff;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+#hero {
+  background-color: #fffffccc;
+}
+
+#header {
+  background-color: #1a1a1a;
+  padding: 1rem 3rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+}
+
+#menu {
+  display: flex;
+  gap: 1em;
+  cursor: pointer;
+}
+
+#buttons {
+  display: flex;
+  gap: 0;
+  cursor: pointer;
+}
+
+#buttons :hover {
+  color: #00925d;
+}
+
+#buttons :focus {
+  border: transparent;
+}
+
+#logo {
+  cursor: pointer;
+}
+
+.header-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.5rem;
+}
+
+.header-btn:active {
+  border: none;
+}
+
+#playbtn {
+  margin-top: 1rem;
+}
+
+#playone {
+  background-color: #00925d;
+  margin-right: 1rem;
+  padding: 1rem;
+}
+
+#playtwo {
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 1rem;
+}
+
+#playthree {
+  background-color: #474545ce;
+  border: none;
+  backdrop-filter: blur(100px);
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
+#playtwoshort {
+  display: none;
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 1rem;
+}
+
+/* Hero Banner */
+.hero-banner {
+  position: relative;
+  height: 50rem;
+  overflow: hidden;
+}
+
+.hero-banner .slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Slides */
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 1s ease-in-out;
+}
+
+.hero-banner .slide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #00000080;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hero-banner .slide.active {
+  opacity: 1;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, #1a1a1a, #1a1a1a00); /* Dark at bottom, fading to transparent */
+  pointer-events: none;
+}
+
+.hero-details {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin-left: 3rem;
+}
+
+.hero-details h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-details p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-details .btn {
+  background-color: #00b894;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  margin-right: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.hero-details .btn.watchlist {
+  background-color: #0984e3;
+}
+
+/* Navigation Buttons */
+.hero-banner .navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.hero-banner .navigation i {
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.movie-wide {
+  flex: 0 0 200px; /* Fixed width for each card */
+  text-align: center;
+  color: #fff;
+  min-width: 300px;
+  min-height: 210px;
+  cursor: pointer;
+
+  img {
+    object-fit: cover;
+    object-position: top;
+    width: 290px;
+    height: 210px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px #0000004d; /* Add a slight shadow for a floating effect */
+
+    &hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  h3 {
+    font-size: 16px;
+    margin: 8px 0 4px; /* Spacing between title and rating */
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span {
+    font-size: 14px;
+    color: #ffa41b;
+    display: block;
+  }
+}
+
+/* Image (25%) */
+.movie-card img {
+  flex: 0 0 25%; /* 25% of the width */
+  width: auto;
+  height: 100%; /* Match the container height */
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: transparent; /* Dark transparent background */
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.movie-overlay h3 {
+  font-size: 14px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-overlay span {
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
+.movie h3 {
+  padding: 0;
+  font-size: 1rem;
+}
+
+.favorites-container .movie-card img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.genre-related {
+  display: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.genre-related .movie {
+  cursor: pointer;
+  min-height: 210px;
+  min-height: 300px;
+
+  img {
+    width: 290px;
+    height: 210px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+  }
+}
+
+#movie-partners {
+  padding: 1rem 0.7rem;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    height: 7rem;
+    width: 7rem;
+    object-fit: contain;
+    margin-right: 1rem;
+  }
+}
+
+.nav-btn {
+  position: absolute;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  height: 15px;
+  width: 15px;
+  font-size: 2rem;
+  text-align: center;
+  opacity: 1;
+}
+
+.nav-btn.next {
+  right: 10px;
+}
+
+.nav-btn .prev {
+  left: 10px;
+}
+
+.nav-btn:hover {
+  opacity: 0.7;
+}
+
+.popular-section {
+  margin: 3rem 0;
+  padding: 0 20px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.popular-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.popular-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.popular-items {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  height: 150px; /* Reduce height of the container */
+}
+
+.popular-items::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 0 auto; /* Ensure horizontal scrolling */
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 250px; /* Set a fixed width for cards */
+  height: 100%; /* Match the container height */
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+/* Ranking (30%) */
+.movie-card .rank {
+  font-size: 2.5rem; /* Biggest element */
+  color: white;
+  flex: 0 0 30%; /* 30% of the width */
+  text-align: right;
+  padding-right: 0.2rem;
+  font-weight: bold;
+}
+
+/* Movie Details (45%) */
+.movie-card .movie-details {
+  flex: 0 0 45%; /* 45% of the width */
+  margin-left: 10px;
+  color: white;
+  text-align: left;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.movie-card .movie-details h3 {
+  margin: 5px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.movie-card .movie-details p {
+  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.movie-card .rating {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: gold;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #00000080;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.scroll-btn.prev-btn {
+  left: 0;
+}
+
+.scroll-btn.next-btn {
+  right: 0;
+}
+
+.scroll-btn:hover {
+  background: #000c;
+}
+
+.just-released {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.just-released h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.movie-carousel {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.movie-cards {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 15px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.movie-cards::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carousel Section */
+.carousel {
+  margin: 2rem 0;
+  position: relative;
+}
+
+.carousel h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.carousel-container ::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10%;
+  background: linear-gradient(to top, #1a1a1a66, #1a1a1a00); /* Dark at bottom, fading to transparent */
+  pointer-events: none;
+}
+
+.carousel-container .movie {
+  position: relative;
+  flex: 0 0 auto;
+  width: 280px; /* Adjust based on your preferred size */
+  height: 420px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  cursor: pointer;
+}
+
+.carousel-container .movie:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.movie span {
+  padding: 0;
+  font-size: 0.9rem;
+  display: block;
+}
+
+/* Carousel Buttons */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #000000b3;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.carousel-button.prev {
+  left: 0;
+}
+
+.carousel-button.next {
+  right: 0;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Watchlist Section */
+#watchlist {
+  margin: 20px 0;
+  padding: 20px 0;
+}
+
+#watchlist h2 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+#watchlist .carousel-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Horizontal scrolling */
+  padding: 10px;
+  scroll-snap-type: x mandatory; /* Smooth scrolling for alignment */
+}
+
+#watchlist .carousel-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+#watchlist .carousel-container::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+
+#watchlist .carousel-container ::after,
+#mostliked .carousel-container ::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10%;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Bottom Banner Styles */
+
+.bottom-banner {
+  width: 100%;
+  height: 50ch; /* Adjust as needed */
+  overflow: hidden;
+  background-color: #1e1e1e;
+}
+
+/* Slideshow container */
+
+.slideshow-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Caption styling (optional) */
+
+.slide-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  color: #fff;
+  background: #0009;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+}
+
+#playbtndown {
+  margin: 1rem;
+}
+
+#playonedown {
+  background-color: #00925d;
+  margin-right: 1rem;
+  padding: 1rem;
+}
+
+#playtwodown {
+  background-color: #ddd9d966;
+  border: 1px solid #b1acac;
+  color: #f5f1f1;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+#tags {
+  display: flex;
+  margin: 3rem auto;
+  text-align: center;
+  gap: 1rem;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+/* Genres */
+
+.tag {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+  border: 2px solid #ffffffb3;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px #0000004d;
+  transition: transform 0.3s ease;
+  background-color: #ddd9d966;
+  cursor: pointer;
+  min-width: 300px;
+  min-height: 60px;
+}
+
+.tag:hover {
+  transition: 0.5s;
+  border: 2px #00925d;
+  background-color: #03c67e;
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px #0006;
+  opacity: 1;
+}
+
+/* Favourites */
+
+.favorites-container {
+  display: none;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  background: #000000e6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0000001a;
+  z-index: 10;
+}
+
+.favorites-container.active {
+  display: block;
+}
+
+.favorites-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.favorites-container .movie-card {
+  display: block;
+  margin: 10px;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .slide-caption {
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+}
+
+.footer {
+  border-top: 1px solid #f5efefd5;
+  display: grid;
+  grid-template-columns: 60% 30%;
+  padding: 2rem;
+}
+
+.footerone {
+  align-items: center;
+  color: #fff;
+}
+
+.contact {
+  padding: 0 1rem;
+  font-weight: bolder;
+  margin-bottom: 1.5rem;
+  width: 70%;
+  font-size: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.terms {
+  margin: 1rem;
+  font-size: 0.7rem;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+  }
+}
+
+.newsletter {
+  font-size: 1.5rem;
+}
+
+.footertwo {
+  padding-left: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.social-media {
+  font-size: 2.2rem;
+  justify-content: space-around;
+  padding-top: 1rem;
+}
+
+#search-bar {
+  display: none; /* Initially hidden */
+  opacity: 0; /* Invisible */
+  transition: opacity 0.3s ease, visibility 0.3s ease, 0.5s ease-in-out;
+}
+
+#search-bar.active {
+  display: inline-block; /* Make it visible */
+  opacity: 1;
+  width: 200px;
+  height: 40px;
+  border: 2px solid #00925d;
+  border-radius: 20px;
+  padding: 0 10px;
+  font-size: 16px; /* Fade in */
+  background-color: transparent;
+}
+
+/* Search Results Overlay */
+#search-results {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 10;
+  left: 0;
+  width: 100%;
+  height: 90vh;
+  background-color: #000000e6;
+  color: white;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 20px;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #007bff #333; /* Thumb and track colors */
+}
+
+#search-results .movie-result {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+#search-results img {
+  width: 100px;
+  height: auto;
+  margin-right: 15px;
+  border-radius: 8px;
+}
+
+/* Webkit-based browsers (Chrome, Safari, Edge) */
+
+#search-results::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+}
+
+#search-results::-webkit-scrollbar-track {
+  background: #333; /* Track color */
+  border-radius: 10px;
+}
+
+#search-results::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Scrollbar thumb color */
+  border-radius: 10px;
+  border: 2px solid #333;
+}
+
+#search-results::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.bars {
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px; /* Width of the overlay */
+  height: 100%;
+  background: linear-gradient(to left, #0000004d, transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Side Navbar */
+#side-navbar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background-color: #111;
+  color: white;
+  box-shadow: 2px 0 5px #0080;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 10000;
+}
+
+#side-navbar ul {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+}
+
+#side-navbar li {
+  margin: 20px 0;
+}
+
+#side-navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+#side-navbar a:hover {
+  color: #f39c12; /* Highlight color */
+}
+
+/* Show navbar when active */
+#side-navbar.show {
+  left: 0; /* Slide into view */
+}
+
+/* Optional: Dim background when the sidebar is active */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000ab;
+  z-index: 10000;
+  display: none; /* Hidden by default */
+}
+
+#overlay.active {
+  display: block; /* Show when sidebar is active */
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 768px) {
+  #header {
+    padding: 5px;
+    font-size: 1rem;
+  }
+
+  #symbol {
+    display: block;
+  }
+
+  #search-bar.active {
+    display: inline-block;
+    opacity: 1;
+    width: 120px;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+
+  .movie-overlay button {
+    background-color: transparent;
+    padding: 0.6em 0.1em;
+    border: none;
+  }
+
+  .movie-overlay-wide button {
+    background-color: transparent;
+    padding: 0.6em 0.1em;
+    margin-left: 1rem;
+    border: none;
+  }
+
+  .movie-overlay button:focus {
+    outline: none;
+    border: none;
+  }
+
+  .movie-overlay-wide button:focus {
+    outline: none;
+    border: none;
+  }
+
+  #buttons {
+    padding: 5px 15px;
+
+    button {
+      padding: 0.3rem;
+    }
+  }
+
+  #search-btn {
+    display: flex;
+  }
+
+  .slide-caption {
+    font-size: 0.8rem;
+    padding: 4px 6px;
+  }
+
+  #menu {
+    display: none;
+  }
+
+  #logo {
+    display: none;
+    gap: 0.4rem;
+  }
+
+  .bars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  #movie-partners {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
+
+  #movie-partners::-webkit-scrollbar {
+    display: none;
+  }
+
+  #movie-partners img {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    margin-right: 20px;
+  }
+
+  .popular-section .popular-items .movie-card {
+    width: 60%;
+  }
+
+  .hero-banner {
+    height: 60vh;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      color: #e6e2e2;
+      font-size: 12px;
+    }
+  }
+
+  .popular-section .popular-items .movie-card .movie-details {
+    h3 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.7rem;
+    }
+  }
+
+  .popular-section .popular-items .movie-card .movie-details .rating {
+    font-size: 0.8rem;
+  }
+
+  .movie-overlay {
+    text-align: left;
+  }
+
+  .movie-overlay-wide {
+    text-align: left;
+    padding-left: 0.7em;
+  }
+
+  #mostliked {
+    h3 {
+      font-size: 24px;
+      padding: 1rem;
+    }
+  }
+
+  .bottom-banner .slideshow-container .slide::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    background: linear-gradient(to top, #6969693c, #1a1a1a20);
+    pointer-events: none;
+  }
+
+  .hero-bottom-details {
+    align-self: end;
+  }
+
+  #tags {
+    scrollbar-width: none;
+  }
+
+  .tag {
+    background-color: #333; /* Example background color */
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    min-width: 10rem;
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap to the next line */
+    justify-content: center; /* Center the boxes horizontally */
+  }
+
+  .genre-related {
+    scrollbar-width: none;
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #playbtndown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  #playonedown,
+  #playtwodown {
+    padding: 0.5rem;
+  }
+
+  .carousel-button,
+  .scroll-btn {
+    display: none;
+  }
+
+  .carousel-container {
+    gap: 0.4rem;
+  }
+
+  #watchlist .carousel-container {
+    gap: 0.4rem;
+  }
+
+  .hero-banner .slide {
+    align-items: end;
+  }
+
+  .hero-details {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding-right: 1rem;
+  }
+
+  #playbtn {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #playone,
+  #playtwo,
+  #playthree,
+  #playtwoshort {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  #playtwo {
+    display: none;
+  }
+
+  #playtwoshort {
+    display: flex;
+    width: auto;
+  }
+
+  .favorites-list {
+    display: block;
+  }
+
+  .contact {
+    font-size: 0.7rem;
+    width: 100%;
+  }
+}
