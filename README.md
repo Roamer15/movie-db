@@ -45,6 +45,7 @@ which was inspired by a mockup from Figma.
 ```
 moviedb/
 ├── src/
+        
         ├── main.js        # JavaScript file for API interactions
         ├── detail.js      # JavaScript file for Secondary page
         ├── style.css      # Main CSS file for layout and design
