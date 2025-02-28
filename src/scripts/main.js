@@ -172,9 +172,9 @@ document.querySelector('#app').innerHTML = `
 
 `
 
-const API_KEY = ''
-const BASE_URL = 'https://api.themoviedb.org/3'
-const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
+const API_KEY = import.meta.env.VITE_API_KEY
+const BASE_URL = import.meta.env.VITE_BASE_URL
+const IMG_PATH = import.meta.env.VITE_IMG_PATH
 
 const API_GENRE_URL = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`
 

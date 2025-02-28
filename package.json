@@ -11,6 +11,6 @@
   "devDependencies": {
     "eslint": "^9.18.0",
     "eslint-plugin-import": "^2.31.0",
-    "vite": "^6.0.1"
+    "vite": "^6.2.0"
   }
 }
