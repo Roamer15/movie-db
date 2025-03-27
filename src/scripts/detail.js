@@ -98,7 +98,7 @@ document.querySelector('#detail').innerHTML = `
 const movie = JSON.parse(localStorage.getItem('selectedMovie'))
 console.log(movie)
 
-const API_KEY = import.meta.env.VITE_API_KEY
+const API_KEY = import.meta.env.VITE_BASE_API_KEY
 const BASE_URL = import.meta.env.VITE_BASE_URL
 const IMG_PATH = import.meta.env.VITE_IMG_PATH
 
