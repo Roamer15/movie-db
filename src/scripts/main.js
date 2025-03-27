@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       movieFavCard.innerHTML = `
           <img src="https://image.tmdb.org/t/p/original${
-            movie.poster_path ? movie.poster_path : movie.backdrop_path
+            movie.poster_path
           }" alt="${movie.title}">
           <h3>${movie.title}</h3>
           <p>⭐ ${movie.vote_average.toFixed(1)}</p>
@@ -448,7 +448,7 @@ async function loadHeroBanner () {
 
     slide.innerHTML = `
       <img src="${IMG_PATH}${
-      movie.backdrop_path ? movie.backdrop_path : movie.poster_path
+      movie.backdrop_path
     }" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
       <div class="hero-details">
         <h1>${movie.title}</h1>
