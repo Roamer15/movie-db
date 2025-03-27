@@ -172,9 +172,9 @@ document.querySelector('#app').innerHTML = `
 
 `
 
-const API_KEY = ''
-const BASE_URL = 'https://api.themoviedb.org/3'
-const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
+const API_KEY = import.meta.env.VITE_BASE_API_KEY
+const BASE_URL = import.meta.env.VITE_BASE_URL
+const IMG_PATH = import.meta.env.VITE_IMG_PATH
 
 const API_GENRE_URL = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`
 
@@ -393,9 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
       movieFavCard.classList.add('movie-card')
 
       movieFavCard.innerHTML = `
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
-        movie.title
-      }">
+          <img src="https://image.tmdb.org/t/p/original${
+            movie.poster_path
+          }" alt="${movie.title}">
           <h3>${movie.title}</h3>
           <p>⭐ ${movie.vote_average.toFixed(1)}</p>
         `
@@ -437,7 +437,7 @@ async function loadHeroBanner () {
     `${BASE_URL}/movie/now_playing?api_key=${API_KEY}`
   )
   const data = await response.json()
-  const movies = data.results.slice(0, 4)
+  const movies = data.results.slice(0, 20)
 
   const slideshow = document.querySelector('.slideshow')
 
@@ -447,7 +447,9 @@ async function loadHeroBanner () {
     if (index === 0) slide.classList.add('active') // Set the first slide as active
 
     slide.innerHTML = `
-      <img src="${IMG_PATH}${movie.backdrop_path}" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
+      <img src="${IMG_PATH}${
+      movie.backdrop_path
+    }" alt="${movie.title}" onclick="window.location.href = 'src/preview.html'">
       <div class="hero-details">
         <h1>${movie.title}</h1>
         <p>${movie.overview}</p>
